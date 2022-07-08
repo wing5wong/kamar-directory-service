@@ -1,6 +1,6 @@
-﻿# KAMAR Directory Service Example
+# KAMAR Directory Service Example
 
-## .ENV 
+## .env 
 Set your Directory Service Username and password in the `.env` file.  
 See `.env.example` for sample entry.  
 
@@ -18,7 +18,7 @@ You MUST make sure you are authenticating requests to your application.
 
 ## Routes
 A single route is defined in `app/routes/kamar.php` accepting `POST` requests to `/kamar`.  
-The route is handled by `HandleKamarPost.php` in `app/Http/Controllers`.  
+The route is handled by `app/Http/Controllers/HandleKamarPost.php`.  
 Base functionality as described in the KAMAR example is implemented here, but you are free to adjust to suit your requirements.
 
 ## Storage
