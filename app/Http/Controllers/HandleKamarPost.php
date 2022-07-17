@@ -30,26 +30,26 @@ class HandleKamarPost extends Controller
     {
         // // Check supplied username/password  matches our expectation
         if ($this->authenticationFails()) {
-            return $this->failedAuthenticationResponse();
+            return $this->handleFailedAuthenticationResponse();
         }
 
         // // Check we have some data
         if ($this->isMissingData()) {
-            return $this->missingDataResponse();
+            return $this->handleMissingDataResponse();
         }
 
         // Check if a 'check' sync, return check response.
         if ($this->isSyncCheck()) {
-            return $this->syncCheckResponse();
+            return $this->handleSyncCheckResponse();
         }
 
         // Check if a 'part' sync, return part response.
         if ($this->isSyncPart()) {
-            return $this->OKResponse();
+            return $this->handleOKResponse();
         }
 
         // All other messages - store the data and return 'OK' response.
-        return $this->OKResponse();
+        return $this->handleOKResponse();
     }
 
     private function authenticationFails()
@@ -72,22 +72,22 @@ class HandleKamarPost extends Controller
         return request('SMSDirectoryData.sync') === "part";
     }
 
-    private function failedAuthenticationResponse()
+    private function handleFailedAuthenticationResponse()
     {
         return $this->sendResponse(403, 'Authentication Failed', true);
     }
 
-    private function missingDataResponse()
+    private function handleMissingDataResponse()
     {
         return $this->sendResponse(401, 'No Data');
     }
 
-    private function syncCheckResponse()
+    private function handleSyncCheckResponse()
     {
         return $this->sendResponse(0, 'OK', true, true);
     }
 
-    private function OKResponse()
+    private function handleOKResponse()
     {
         // Do something
         $this->handleDirectoryData();
