@@ -11,6 +11,7 @@ class HandleKamarPost extends Controller
     public $version;
     public $infoUrl;
     public $privacyStatement;
+    public $options;
     private $username;
     private $password;
 
@@ -20,6 +21,7 @@ class HandleKamarPost extends Controller
         $this->version = config('kamar.serviceVersion');
         $this->infoUrl = config('kamar.infoUrl');
         $this->privacyStatement = config('kamar.privacyStatement');
+        $this->options = config('kamar.options');
         $this->username = config('kamar.username');
         $this->password = config('kamar.password');
     }
@@ -55,6 +57,21 @@ class HandleKamarPost extends Controller
         return request()->server('HTTP_AUTHORIZATION') !== ("Basic " . base64_encode($this->username . ':' . $this->password));
     }
 
+    private function isMissingData()
+    {
+        return empty(request()->getContent());
+    }
+
+    private function isSyncCheck()
+    {
+        return request('SMSDirectoryData.sync') === "check";
+    }
+
+    private function isSyncPart()
+    {
+        return request('SMSDirectoryData.sync') === "part";
+    }
+
     private function failedAuthenticationResponse()
     {
         return response()->json([
@@ -68,11 +85,6 @@ class HandleKamarPost extends Controller
         ]);
     }
 
-    private function isMissingData()
-    {
-        return empty(request()->getContent());
-    }
-
     private function missingDataResponse()
     {
         return response()->json([
@@ -84,16 +96,6 @@ class HandleKamarPost extends Controller
                 "version" => $this->version,
             ]
         ]);
-    }
-
-    private function isSyncCheck()
-    {
-        return request('SMSDirectoryData.sync') === "check";
-    }
-
-    private function isSyncPart()
-    {
-        return request('SMSDirectoryData.sync') === "part";
     }
 
     private function syncCheckResponse()
@@ -110,45 +112,7 @@ class HandleKamarPost extends Controller
                 "infourl" => $this->infoUrl,
                 "privacystatement" => $this->privacyStatement,
 
-                "options" => [
-
-                    "ics" => false,
-
-                    "students" => [
-                        "details" => true,
-                        "passwords" => false,
-                        "photos" => false,
-                        "groups" => false,
-                        "awards" => false,
-                        "timetables" => false,
-                        "attendance" => false,
-                        "assessments" => false,
-                        "pastoral" => true,
-                        "learningsupport" => false,
-                        "fields" => [
-                            "required" =>  "uniqueid;schoolindex;nsn;firstname;lastname",
-                            "optional" => "username;password"
-                        ]
-                    ],
-
-                    "staff" => [
-                        "details" => false,
-                        "passwords" => false,
-                        "photos" => false,
-                        "timetables" => false,
-                        "fields" => [
-                            "required" =>  "uniqueid;schoolindex;firstname;lastname",
-                            "optional" => "title;classification"
-                        ]
-                    ],
-
-                    "common" => [
-                        "subjects" => false,
-                        "notices" => false,
-                        "calendar" => false,
-                        "bookings" => false
-                    ]
-                ]
+                "options" => $this->options
 
             ]
         ]);
