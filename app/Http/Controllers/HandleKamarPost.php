@@ -34,7 +34,7 @@ class HandleKamarPost extends Controller
         }
 
         // // Check we have some data
-        if($this->isMissingData()) {
+        if ($this->isMissingData()) {
             return $this->missingDataResponse();
         }
 
@@ -74,60 +74,53 @@ class HandleKamarPost extends Controller
 
     private function failedAuthenticationResponse()
     {
-        return response()->json([
-            "SMSDirectoryData" => [
-                "error" => 403,
-                "result" => "Authentication Failed",
-
-                "service" => $this->service,
-                "version" => $this->version,
-            ]
-        ]);
+        return $this->sendResponse(403, 'Authentication Failed', true);
     }
 
     private function missingDataResponse()
     {
-        return response()->json([
-            "SMSDirectoryData" => [
-                "error" => 401,
-                "result" => "No Data",
-
-                "service" => $this->service,
-                "version" => $this->version,
-            ]
-        ]);
+        return $this->sendResponse(401, 'No Data');
     }
 
     private function syncCheckResponse()
     {
-        return response()->json([
-            'SMSDirectoryData' => [
-                'error' => 0,
-                'result' => 'OK',
-                "status" => "Ready",
-
-                "service" => $this->service,
-                "version" =>  $this->version,
-
-                "infourl" => $this->infoUrl,
-                "privacystatement" => $this->privacyStatement,
-
-                "options" => $this->options,
-            ]
-        ]);
+        return $this->sendResponse(0, 'OK', true, true);
     }
 
     private function OKResponse()
     {
         // Do something
         Storage::disk('local')
-                ->put('data/'.time()."_".mt_rand(1000,9999).".json", request()->getContent());
+            ->put('data/' . time() . "_" . mt_rand(1000, 9999) . ".json", request()->getContent());
+
+        return $this->sendResponse(0, 'OK');
+    }
+
+    private function sendResponse($error, $result, $includeServiceDetail = false, $includeCheckData = false)
+    {
+        $directoryData =  [
+            'error' => $error,
+            'result' => $result,
+        ];
+
+        if($includeServiceDetail) {
+            $directoryData = array_merge($directoryData, [
+                "service" => $this->service,
+                "version" =>  $this->version,
+            ]);
+        }
+
+        if ($includeCheckData) {
+            $directoryData = array_merge($directoryData, [
+                "status" => "Ready",
+                "infourl" => $this->infoUrl,
+                "privacystatement" => $this->privacyStatement,
+                "options" => $this->options,
+            ]);
+        }
 
         return response()->json([
-            'SMSDirectoryData' => [
-                'error' => 0,
-                'result' => 'OK',
-            ]
+            'SMSDirectoryData' => $directoryData
         ]);
     }
 }
