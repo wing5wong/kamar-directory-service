@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Storage;
 
 class HandleKamarPost extends Controller
 {
-    public $service;
-    public $version;
-    public $infoUrl;
-    public $privacyStatement;
-    public $options;
-    private $username;
-    private $password;
+    public string $service;
+    public float $version;
+    public string$infoUrl;
+    public string $privacyStatement;
+    public array $options;
+    private string $username;
+    private string $password;
 
     public function __construct()
     {
