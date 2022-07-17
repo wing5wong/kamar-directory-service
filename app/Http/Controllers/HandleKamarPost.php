@@ -90,9 +90,7 @@ class HandleKamarPost extends Controller
     private function OKResponse()
     {
         // Do something
-        Storage::disk('local')
-            ->put('data/' . time() . "_" . mt_rand(1000, 9999) . ".json", request()->getContent());
-
+        $this->handleDirectoryData();
         return $this->sendResponse(0, 'OK');
     }
 
@@ -103,7 +101,7 @@ class HandleKamarPost extends Controller
             'result' => $result,
         ];
 
-        if($includeServiceDetail) {
+        if ($includeServiceDetail) {
             $directoryData = array_merge($directoryData, [
                 "service" => $this->service,
                 "version" =>  $this->version,
@@ -122,5 +120,11 @@ class HandleKamarPost extends Controller
         return response()->json([
             'SMSDirectoryData' => $directoryData
         ]);
+    }
+
+    private function handleDirectoryData()
+    {
+        Storage::disk('local')
+            ->put('data/' . time() . "_" . mt_rand(1000, 9999) . ".json", request()->getContent());
     }
 }
