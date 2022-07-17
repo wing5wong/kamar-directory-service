@@ -112,8 +112,7 @@ class HandleKamarPost extends Controller
                 "infourl" => $this->infoUrl,
                 "privacystatement" => $this->privacyStatement,
 
-                "options" => $this->options
-
+                "options" => $this->options,
             ]
         ]);
     }
