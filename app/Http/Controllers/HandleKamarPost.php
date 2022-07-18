@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Responses\FailedAuthentication;
-use App\Http\Models\Responses\MissingData;
-use App\Http\Models\Responses\OK;
-use App\Http\Models\Responses\SyncCheck;
+use App\Models\Responses\FailedAuthentication;
+use App\Models\Responses\MissingData;
+use App\Models\Responses\OK;
+use App\Models\Responses\SyncCheck;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
