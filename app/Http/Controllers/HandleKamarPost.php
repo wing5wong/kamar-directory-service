@@ -18,11 +18,6 @@ class HandleKamarPost extends Controller
 
     public function __construct()
     {
-        $this->service = config('kamar.serviceName');
-        $this->version = config('kamar.serviceVersion');
-        $this->infoUrl = config('kamar.infoUrl');
-        $this->privacyStatement = config('kamar.privacyStatement');
-        $this->options = config('kamar.options');
         $this->username = config('kamar.username');
         $this->password = config('kamar.password');
     }
@@ -55,8 +50,6 @@ class HandleKamarPost extends Controller
 
     private function authenticationFails()
     {
-        Log::info(request()->server('HTTP_AUTHORIZATION'));
-        Log::info("Basic " . base64_encode($this->username . ':' . $this->password));
         return request()->server('HTTP_AUTHORIZATION') !== ("Basic " . base64_encode($this->username . ':' . $this->password));
     }
 
@@ -77,24 +70,24 @@ class HandleKamarPost extends Controller
 
     private function handleFailedAuthenticationResponse()
     {
-        return response()->json(new FailedAuthentication);
+        return response()->json(new FailedAuthentication());
     }
 
     private function handleMissingDataResponse()
     {
-        return response()->json(new MissingData);
+        return response()->json(new MissingData());
     }
 
     private function handleSyncCheckResponse()
     {
-        return response()->json(new SyncCheck);
+        return response()->json(new SyncCheck());
     }
 
     private function handleOKResponse()
     {
         // Do something
         $this->handleDirectoryData();
-        return response()->json(new OK);
+        return response()->json(new OK());
     }
 
     private function handleDirectoryData()

@@ -19,16 +19,14 @@ class SyncCheck implements Arrayable
         $this->infoUrl = config('kamar.infoUrl');
         $this->privacyStatement = config('kamar.privacyStatement');
         $this->options = config('kamar.options');
-        $this->username = config('kamar.username');
-        $this->password = config('kamar.password');
     }
 
     public function toArray()
     {
         return [
             'SMSDirectoryData' => [
-                'error' => 403,
-                'result' => 'Authentication Failed',
+                'error' => 0,
+                'result' => 'OK',
                 "status" => "Ready",
                 "service" => $this->service,
                 "version" =>  $this->version,
