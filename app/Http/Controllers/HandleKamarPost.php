@@ -6,16 +6,13 @@ use App\Models\Responses\FailedAuthentication;
 use App\Models\Responses\MissingData;
 use App\Models\Responses\OK;
 use App\Models\Responses\SyncCheck;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class HandleKamarPost extends Controller
 {
-    public string $service;
-    public float $version;
-    public string$infoUrl;
-    public string $privacyStatement;
-    public array $options;
     private string $username;
     private string $password;
 
@@ -58,6 +55,8 @@ class HandleKamarPost extends Controller
 
     private function authenticationFails()
     {
+        Log::info(request()->server('HTTP_AUTHORIZATION'));
+        Log::info("Basic " . base64_encode($this->username . ':' . $this->password));
         return request()->server('HTTP_AUTHORIZATION') !== ("Basic " . base64_encode($this->username . ':' . $this->password));
     }
 
