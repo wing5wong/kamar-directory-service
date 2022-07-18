@@ -2,14 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Responses\FailedAuthentication;
-use App\Models\Responses\MissingData;
-use App\Models\Responses\OK;
-use App\Models\Responses\SyncCheck;
-
+use App\Models\Responses\{FailedAuthentication, MissingData, SyncCheck, OK};
+use Illuminate\Support\Facades\{Log, Storage};
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class HandleKamarPost extends Controller
 {
@@ -24,12 +19,12 @@ class HandleKamarPost extends Controller
 
     public function __invoke(Request $request)
     {
-        // // Check supplied username/password  matches our expectation
+        // Check supplied username/password  matches our expectation
         if ($this->authenticationFails()) {
             return $this->handleFailedAuthenticationResponse();
         }
 
-        // // Check we have some data
+        // Check we have some data
         if ($this->isMissingData()) {
             return $this->handleMissingDataResponse();
         }
