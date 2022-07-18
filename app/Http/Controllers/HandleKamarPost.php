@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\Responses\FailedAuthentication;
+use App\Http\Models\Responses\MissingData;
+use App\Http\Models\Responses\OK;
+use App\Http\Models\Responses\SyncCheck;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -74,52 +78,24 @@ class HandleKamarPost extends Controller
 
     private function handleFailedAuthenticationResponse()
     {
-        return $this->sendResponse(403, 'Authentication Failed', true);
+        return response()->json(new FailedAuthentication);
     }
 
     private function handleMissingDataResponse()
     {
-        return $this->sendResponse(401, 'No Data');
+        return response()->json(new MissingData);
     }
 
     private function handleSyncCheckResponse()
     {
-        return $this->sendResponse(0, 'OK', true, true);
+        return response()->json(new SyncCheck);
     }
 
     private function handleOKResponse()
     {
         // Do something
         $this->handleDirectoryData();
-        return $this->sendResponse(0, 'OK');
-    }
-
-    private function sendResponse($error, $result, $includeServiceDetail = false, $includeCheckData = false)
-    {
-        $directoryData =  [
-            'error' => $error,
-            'result' => $result,
-        ];
-
-        if ($includeServiceDetail) {
-            $directoryData = array_merge($directoryData, [
-                "service" => $this->service,
-                "version" =>  $this->version,
-            ]);
-        }
-
-        if ($includeCheckData) {
-            $directoryData = array_merge($directoryData, [
-                "status" => "Ready",
-                "infourl" => $this->infoUrl,
-                "privacystatement" => $this->privacyStatement,
-                "options" => $this->options,
-            ]);
-        }
-
-        return response()->json([
-            'SMSDirectoryData' => $directoryData
-        ]);
+        return response()->json(new OK);
     }
 
     private function handleDirectoryData()
