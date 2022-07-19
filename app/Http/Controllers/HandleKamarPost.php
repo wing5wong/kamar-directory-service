@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Responses\{ FailedAuthentication, MissingData, SyncCheck, OK };
+use App\Models\Responses\{FailedAuthentication, MissingData, SyncCheck, OK};
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -21,17 +21,17 @@ class HandleKamarPost extends Controller
     {
         // Check supplied username/password  matches our expectation
         if ($this->authenticationFails()) {
-            return $this->handleFailedAuthenticationResponse();
+            return response()->json(new FailedAuthentication());
         }
 
         // Check we have some data
         if ($this->isMissingData()) {
-            return $this->handleMissingDataResponse();
+            return response()->json(new MissingData());
         }
 
         // Check if a 'check' sync, return check response.
         if ($this->isSyncCheck()) {
-            return $this->handleSyncCheckResponse();
+            return response()->json(new SyncCheck());
         }
 
         // Check if a 'part' sync, return part response.
@@ -61,21 +61,6 @@ class HandleKamarPost extends Controller
     private function isSyncPart()
     {
         return request('SMSDirectoryData.sync') === "part";
-    }
-
-    private function handleFailedAuthenticationResponse()
-    {
-        return response()->json(new FailedAuthentication());
-    }
-
-    private function handleMissingDataResponse()
-    {
-        return response()->json(new MissingData());
-    }
-
-    private function handleSyncCheckResponse()
-    {
-        return response()->json(new SyncCheck());
     }
 
     private function handleOKResponse()
