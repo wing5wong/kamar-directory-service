@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Responses\{FailedAuthentication, MissingData, SyncCheck, OK};
-use Illuminate\Support\Facades\{Log, Storage};
+use App\Models\Responses\{ FailedAuthentication, MissingData, SyncCheck, OK };
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class HandleKamarPost extends Controller
