@@ -2,15 +2,18 @@
 
 namespace App\Models\Responses;
 
-use Illuminate\Contracts\Support\Arrayable;
-
-class SyncCheck implements Arrayable
+class SyncCheck extends AbstractResponse
 {
-    private string $service;
-    private float $version;
-    public string$infoUrl;
-    public string $privacyStatement;
-    public array $options;
+    protected int $error = 0;
+    protected string $result = "OK";
+    protected string $status = "Ready";
+
+    protected string $service;
+    protected float $version;
+    protected string $infoUrl;
+    protected string $privacyStatement;
+    protected array $options;
+
 
     public function __construct()
     {
@@ -25,9 +28,9 @@ class SyncCheck implements Arrayable
     {
         return [
             'SMSDirectoryData' => [
-                'error' => 0,
-                'result' => 'OK',
-                "status" => "Ready",
+                'error' => $this->error,
+                'result' => $this->result,
+                "status" => $this->status,
                 "service" => $this->service,
                 "version" =>  $this->version,
                 "infourl" => $this->infoUrl,

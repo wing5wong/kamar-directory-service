@@ -2,17 +2,8 @@
 
 namespace App\Models\Responses;
 
-use Illuminate\Contracts\Support\Arrayable;
-
-class MissingData implements Arrayable
+class MissingData extends AbstractResponse
 {
-    public function toArray()
-    {
-        return [
-            'SMSDirectoryData' => [
-                'error' => 401,
-                'result' => 'No Data',
-            ]
-        ];
-    }
+    protected int $error = 401;
+    protected string $result = "Missing Data";
 }

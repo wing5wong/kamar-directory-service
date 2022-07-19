@@ -2,17 +2,8 @@
 
 namespace App\Models\Responses;
 
-use Illuminate\Contracts\Support\Arrayable;
-
-class OK implements Arrayable
+class OK extends AbstractResponse
 {
-    public function toArray()
-    {
-        return [
-            'SMSDirectoryData' => [
-                'error' => 0,
-                'result' => 'OK',
-            ]
-        ];
-    }
+    protected int $error = 0;
+    protected string $result = "OK";
 }
