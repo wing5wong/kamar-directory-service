@@ -14,7 +14,6 @@ class SyncCheck extends AbstractResponse
     protected string $privacyStatement;
     protected array $options;
 
-
     public function __construct()
     {
         $this->service = config('kamar.serviceName');
