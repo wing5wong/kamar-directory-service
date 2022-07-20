@@ -14,24 +14,18 @@ class Success extends AbstractCheckResponse
     public function __construct()
     {
         parent::__construct();
+
         $this->infoUrl = config('kamar.infoUrl');
         $this->privacyStatement = config('kamar.privacyStatement');
         $this->options = config('kamar.options');
-    }
-
-    public function toArray()
-    {
-        return [
-            'SMSDirectoryData' => [
-                'error' => $this->error,
-                'result' => $this->result,
-                "status" => $this->status,
-                "service" => $this->service,
-                "version" =>  $this->version,
-                "infourl" => $this->infoUrl,
-                "privacystatement" => $this->privacyStatement,
-                "options" => $this->options,
-            ]
+        
+        $this->additionalFields = [
+            'status' => $this->status,
+            'service' => $this->service,
+            'version' => $this->version,
+            'infourl' => $this->infoUrl,
+            'privacystatement' => $this->privacyStatement,
+            'options' => $this->options,
         ];
     }
 }

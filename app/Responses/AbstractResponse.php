@@ -6,16 +6,20 @@ use Illuminate\Contracts\Support\Arrayable;
 
 abstract class AbstractResponse implements Arrayable
 {
-    protected int $error;
-    protected string $result;
+    protected int $error = 501;
+    protected string $result = "Not Implemented";
+    protected array $additionalFields = [];
 
     public function toArray()
     {
         return [
-            'SMSDirectoryData' => [
-                'error' => $this->error,
-                'result' => $this->result,
-            ]
+            'SMSDirectoryData' => array_merge(
+                [
+                    'error' => $this->error,
+                    'result' => $this->result,
+                ],
+                $this->additionalFields
+            )
         ];
     }
 }

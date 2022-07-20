@@ -13,17 +13,10 @@ abstract class AbstractCheckResponse extends AbstractResponse
     {
         $this->service = config('kamar.serviceName');
         $this->version = config('kamar.serviceVersion');
-    }
-
-    public function toArray()
-    {
-        return [
-            'SMSDirectoryData' => [
-                'error' => $this->error,
-                'result' => $this->result,
-                'service' => $this->service,
-                'version' => $this->version,
-            ]
+        
+        $this->additionalFields = [
+            'service' => $this->service,
+            'version' => $this->version,
         ];
     }
 }
