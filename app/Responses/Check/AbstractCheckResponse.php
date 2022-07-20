@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models\Responses\Check;
+namespace App\Responses\Check;
 
-use App\Models\Responses\AbstractResponse;
+use App\Responses\AbstractResponse;
 
 abstract class AbstractCheckResponse extends AbstractResponse
 {

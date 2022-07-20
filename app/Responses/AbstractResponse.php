@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Responses;
+namespace App\Responses;
 
 use Illuminate\Contracts\Support\Arrayable;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models\Responses\Standard;
+namespace App\Responses\Standard;
 
-use App\Models\Responses\AbstractResponse;
+use App\Responses\AbstractResponse;
 
 class FailedAuthentication extends AbstractResponse
 {

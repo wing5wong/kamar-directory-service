@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Responses\Check;
+namespace App\Responses\Check;
 
 class FailedAuthentication extends AbstractCheckResponse
 {
