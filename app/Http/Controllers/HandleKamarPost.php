@@ -6,7 +6,6 @@ use App\Responses\Check\{Success as CheckSuccess, FailedAuthentication as CheckF
 use App\Responses\Standard\{Success, FailedAuthentication, MissingData};
 use App\{AuthenticationCheck, KamarData};
 
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class HandleKamarPost extends Controller
@@ -55,13 +54,7 @@ class HandleKamarPost extends Controller
     private function handleOKResponse()
     {
         // Do something
-        $this->handleDirectoryData();
+        $this->data->store();
         return response()->json(new Success());
-    }
-
-    private function handleDirectoryData()
-    {
-        Storage::disk('local')
-            ->put('data/' . time() . "_" . mt_rand(1000, 9999) . ".json", request()->getContent());
     }
 }
