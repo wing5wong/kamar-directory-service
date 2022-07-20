@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Responses\Check\{Success as CheckSuccess, FailedAuthentication as CheckFailedAuthentication};
-use App\Models\Responses\Standard\{Success, MissingData};
+use App\Responses\Check\{Success as CheckSuccess, FailedAuthentication as CheckFailedAuthentication};
+use App\Responses\Standard\{Success, MissingData};
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
