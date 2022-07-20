@@ -1,23 +1,19 @@
 <?php
 
-namespace App\Models\Responses;
+namespace App\Models\Responses\Check;
 
-class SyncCheck extends AbstractResponse
+class Success extends AbstractCheckResponse
 {
     protected int $error = 0;
     protected string $result = "OK";
     protected string $status = "Ready";
-
-    protected string $service;
-    protected float $version;
     protected string $infoUrl;
     protected string $privacyStatement;
     protected array $options;
 
     public function __construct()
     {
-        $this->service = config('kamar.serviceName');
-        $this->version = config('kamar.serviceVersion');
+        parent::__construct();
         $this->infoUrl = config('kamar.infoUrl');
         $this->privacyStatement = config('kamar.privacyStatement');
         $this->options = config('kamar.options');

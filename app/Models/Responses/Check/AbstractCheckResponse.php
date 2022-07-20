@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Models\Responses;
+namespace App\Models\Responses\Check;
 
-abstract class AbstractFailedResponse extends AbstractResponse
+use App\Models\Responses\AbstractResponse;
+
+abstract class AbstractCheckResponse extends AbstractResponse
 {
     protected string $service;
     protected float $version;

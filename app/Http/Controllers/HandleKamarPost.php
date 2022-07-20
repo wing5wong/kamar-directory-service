@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Responses\{FailedAuthentication, MissingData, SyncCheck, OK};
+use App\Models\Responses\Check\{Success as CheckSuccess, FailedAuthentication as CheckFailedAuthentication};
+use App\Models\Responses\Standard\{Success, MissingData};
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -21,7 +23,7 @@ class HandleKamarPost extends Controller
     {
         // Check supplied username/password  matches our expectation
         if ($this->authenticationFails()) {
-            return response()->json(new FailedAuthentication());
+            return response()->json(new CheckFailedAuthentication());
         }
 
         // Check we have some data
@@ -31,7 +33,7 @@ class HandleKamarPost extends Controller
 
         // Check if a 'check' sync, return check response.
         if ($this->isSyncCheck()) {
-            return response()->json(new SyncCheck());
+            return response()->json(new CheckSuccess());
         }
 
         // Check if a 'part' sync, return part response.
@@ -67,7 +69,7 @@ class HandleKamarPost extends Controller
     {
         // Do something
         $this->handleDirectoryData();
-        return response()->json(new OK());
+        return response()->json(new Success());
     }
 
     private function handleDirectoryData()
