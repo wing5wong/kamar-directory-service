@@ -21,7 +21,7 @@ class HandleKamarPost extends Controller
         if ($this->data->isSyncCheck()) {
 
             if ($this->authCheck->fails()) {
-                return response()->json(new CheckFailedAuthentication());  // failed during check, we have to return error, code, version and service
+                return response()->json(new CheckFailedAuthentication());  // failed during check, we have to return error, result, version and service
             }
 
             if ($this->data->isMissing()) {
@@ -32,7 +32,7 @@ class HandleKamarPost extends Controller
         }
 
         if ($this->authCheck->fails()) {
-            return response()->json(new FailedAuthentication());  // failed during any other request, we only have to return error and code
+            return response()->json(new FailedAuthentication());  // failed during any other request, we only have to return error and result
         }
 
         // Check we have some data
