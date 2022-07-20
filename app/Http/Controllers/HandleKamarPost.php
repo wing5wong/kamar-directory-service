@@ -6,8 +6,6 @@ use App\Responses\Check\{Success as CheckSuccess, FailedAuthentication as CheckF
 use App\Responses\Standard\{Success, FailedAuthentication, MissingData};
 use App\{AuthenticationCheck, KamarData};
 
-use Illuminate\Http\Request;
-
 class HandleKamarPost extends Controller
 {
 
@@ -17,7 +15,7 @@ class HandleKamarPost extends Controller
     ) {
     }
 
-    public function __invoke(Request $request)
+    public function __invoke()
     {
         // Check supplied username/password  matches our expectation
         if ($this->data->isSyncCheck()) {
