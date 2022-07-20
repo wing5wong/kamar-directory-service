@@ -28,5 +28,8 @@ You MUST make sure you are authenticating requests to your application.
 The example implementation will write json data files at `/storage/app/data`. These files are not publicly accessible by default.
 Consider a task to tidy up these files once processed.
 
+## Testing
+Run tests with `php artisan test`
+
 ## KAMAR Directory Services Documentation
 See https://directoryservices.kamar.nz/ for implementation details.
