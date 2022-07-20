@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Responses\Check\{Success as CheckSuccess, FailedAuthentication as CheckFailedAuthentication};
-use App\Responses\Standard\{Success, MissingData};
+use App\Responses\Standard\{Success, FailedAuthentication, MissingData};
 use App\{AuthenticationCheck, KamarData};
 
 use Illuminate\Support\Facades\Storage;
@@ -21,8 +21,11 @@ class HandleKamarPost extends Controller
     public function __invoke(Request $request)
     {
         // Check supplied username/password  matches our expectation
-        if ($this->authCheck->fails()) {
+        if ($this->data->isSyncCheck() && $this->authCheck->fails()) {
             return response()->json(new CheckFailedAuthentication());
+        }
+        if (!$this->data->isSyncCheck() && $this->authCheck->fails()) {
+            return response()->json(new FailedAuthentication());
         }
 
         // Check we have some data
