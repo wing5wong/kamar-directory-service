@@ -9,7 +9,7 @@ class KamarData
 
     public function isMissing()
     {
-        return empty(request()->getContent());
+        return !request()->has('SMSDirectoryData');
     }
 
     public function isSyncCheck()
