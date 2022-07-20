@@ -4,25 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Responses\Check\{Success as CheckSuccess, FailedAuthentication as CheckFailedAuthentication};
 use App\Responses\Standard\{Success, MissingData};
+use App\AuthenticationCheck;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class HandleKamarPost extends Controller
 {
-    private string $username;
-    private string $password;
 
-    public function __construct()
-    {
-        $this->username = config('kamar.username');
-        $this->password = config('kamar.password');
+    public function __construct(
+        protected AuthenticationCheck $authCheck
+    ) {
     }
 
     public function __invoke(Request $request)
     {
         // Check supplied username/password  matches our expectation
-        if ($this->authenticationFails()) {
+        if ($this->authCheck->fails()) {
             return response()->json(new CheckFailedAuthentication());
         }
 
@@ -43,11 +41,6 @@ class HandleKamarPost extends Controller
 
         // All other messages - store the data and return 'OK' response.
         return $this->handleOKResponse();
-    }
-
-    private function authenticationFails()
-    {
-        return request()->server('HTTP_AUTHORIZATION') !== ("Basic " . base64_encode($this->username . ':' . $this->password));
     }
 
     private function isMissingData()
