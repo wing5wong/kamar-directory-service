@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Responses\Check\{Success as CheckSuccess, FailedAuthentication as CheckFailedAuthentication};
 use App\Responses\Standard\{Success, MissingData};
-use App\AuthenticationCheck;
+use App\{AuthenticationCheck, KamarData};
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -13,7 +13,8 @@ class HandleKamarPost extends Controller
 {
 
     public function __construct(
-        protected AuthenticationCheck $authCheck
+        protected AuthenticationCheck $authCheck,
+        protected KamarData $data,
     ) {
     }
 
@@ -25,37 +26,22 @@ class HandleKamarPost extends Controller
         }
 
         // Check we have some data
-        if ($this->isMissingData()) {
+        if ($this->data->isMissing()) {
             return response()->json(new MissingData());
         }
 
         // Check if a 'check' sync, return check response.
-        if ($this->isSyncCheck()) {
+        if ($this->data->isSyncCheck()) {
             return response()->json(new CheckSuccess());
         }
 
         // Check if a 'part' sync, return part response.
-        if ($this->isSyncPart()) {
+        if ($this->data->isSyncPart()) {
             return $this->handleOKResponse();
         }
 
         // All other messages - store the data and return 'OK' response.
         return $this->handleOKResponse();
-    }
-
-    private function isMissingData()
-    {
-        return empty(request()->getContent());
-    }
-
-    private function isSyncCheck()
-    {
-        return request('SMSDirectoryData.sync') === "check";
-    }
-
-    private function isSyncPart()
-    {
-        return request('SMSDirectoryData.sync') === "part";
     }
 
     private function handleOKResponse()
