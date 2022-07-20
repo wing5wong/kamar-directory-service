@@ -4,8 +4,6 @@ namespace App\Models\Responses;
 
 abstract class AbstractFailedResponse extends AbstractResponse
 {
-    protected int $error;
-    protected string $result;
     protected string $service;
     protected float $version;
 
