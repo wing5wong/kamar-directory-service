@@ -56,5 +56,4 @@ class KamarDataTest extends TestCase
         $this->assertFalse((new KamarData())->isSyncPart());
     }
 
-
 }
