@@ -13,7 +13,7 @@ class ResponsesTest extends TestCase
         $response->assertJson([
             'SMSDirectoryData' => [
                 'error' => 403,
-                'result' => 'Authentication Failed',
+                'result' => 'Forbidden',
             ]
         ]);
 
@@ -36,7 +36,7 @@ class ResponsesTest extends TestCase
         $response->assertJson([
             'SMSDirectoryData' => [
                 'error' => 403,
-                'result' => 'Authentication Failed',
+                'result' => 'Forbidden',
                 'service' => config('kamar.serviceName'),
                 'version' => config('kamar.serviceVersion'),
             ]
@@ -52,7 +52,7 @@ class ResponsesTest extends TestCase
         $response->assertJson([
             'SMSDirectoryData' => [
                 'error' => 403,
-                'result' => 'Authentication Failed',
+                'result' => 'Forbidden',
             ]
         ]);
 
@@ -77,14 +77,14 @@ class ResponsesTest extends TestCase
         $response->assertJson([
             'SMSDirectoryData' => [
                 'error' => 403,
-                'result' => 'Authentication Failed',
+                'result' => 'Forbidden',
                 'service' => config('kamar.serviceName'),
                 'version' => config('kamar.serviceVersion'),
             ]
         ]);
     }
 
-    public function test_authenticated_standard_requests_with_blank_data_return_401()
+    public function test_authenticated_standard_requests_with_blank_data_return_400()
     {
         $response = $this->withHeaders([
             'HTTP_AUTHORIZATION' => $this->validCredentials(),
@@ -92,8 +92,8 @@ class ResponsesTest extends TestCase
 
         $response->assertJson([
             'SMSDirectoryData' => [
-                'error' => 401,
-                'result' => 'Missing Data',
+                'error' => 400,
+                'result' => 'Bad Request',
             ]
         ]);
 
@@ -105,7 +105,7 @@ class ResponsesTest extends TestCase
         ]);
     }
 
-    public function test_authenticated_standard_requests_with_empty_data_return_401()
+    public function test_authenticated_standard_requests_with_empty_data_return_400()
     {
         $response = $this->withHeaders([
             'HTTP_AUTHORIZATION' => $this->validCredentials(),
@@ -113,8 +113,8 @@ class ResponsesTest extends TestCase
 
         $response->assertJson([
             'SMSDirectoryData' => [
-                'error' => 401,
-                'result' => 'Missing Data',
+                'error' => 400,
+                'result' => 'Bad Request',
             ]
         ]);
 

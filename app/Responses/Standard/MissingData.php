@@ -6,6 +6,6 @@ use App\Responses\AbstractResponse;
 
 class MissingData extends AbstractResponse
 {
-    protected int $error = 401;
-    protected string $result = "Missing Data";
+    protected int $error = 400;
+    protected string $result = "Bad Request";
 }

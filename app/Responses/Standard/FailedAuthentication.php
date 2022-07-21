@@ -7,5 +7,5 @@ use App\Responses\AbstractResponse;
 class FailedAuthentication extends AbstractResponse
 {
     protected int $error = 403;
-    protected string $result = "Authentication Failed";
+    protected string $result = "Forbidden";
 }
