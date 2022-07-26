@@ -12,20 +12,25 @@ class KamarData
         return !request()->has('SMSDirectoryData');
     }
 
+    public function getSyncType()
+    {
+        return request('SMSDirectoryData.sync');
+    }
+
     public function isSyncCheck()
     {
-        return request('SMSDirectoryData.sync') === "check";
+        return $this->getSyncType() === "check";
     }
 
     public function isSyncPart()
     {
-        return request('SMSDirectoryData.sync') === "part";
+        return $this->getSyncType() === "part";
     }
 
     public function store()
     {
         Storage::disk('local')
-            ->put('data/' . time() . "_" . mt_rand(1000, 9999) . ".json", request()->getContent());
+            ->put('data/' . $this->getSyncType() . "_" . time() . "_" . mt_rand(1000, 9999) . ".json", request()->getContent());
     }
 
 }
