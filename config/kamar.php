@@ -17,29 +17,29 @@ return [
 
         "students" => [
             "details" => true,
-            "passwords" => false,
+            "passwords" => true,
             "photos" => false,
             "groups" => false,
             "awards" => false,
-            "timetables" => false,
+            "timetables" => true,
             "attendance" => false,
             "assessments" => false,
             "pastoral" => true,
             "learningsupport" => false,
             "fields" => [
-                "required" =>  "uniqueid;schoolindex;nsn;firstname;lastname",
-                "optional" => "username;password"
+                "required" =>  "uniqueid;schoolindex;nsn;firstname;lastname;email;",
+                "optional" => "username;password;yearlevel;leavingdate;tutor"
             ]
         ],
 
         "staff" => [
-            "details" => false,
+            "details" => true,
             "passwords" => false,
             "photos" => false,
-            "timetables" => false,
+            "timetables" => true,
             "fields" => [
-                "required" =>  "uniqueid;schoolindex;firstname;lastname",
-                "optional" => "title;classification"
+                "required" =>  "uniqueid;schoolindex;firstname;lastname;email",
+                "optional" => "title;classification;tutor;leavingdate"
             ]
         ],
 
