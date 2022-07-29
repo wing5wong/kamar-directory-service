@@ -27,8 +27,12 @@ class KamarData
 
     public function isSyncPart()
     {
-        if(!$this->data) { return false; }
         return $this->getSyncType() === "part";
+    }
+
+    public function isSyncFull()
+    {
+        return $this->getSyncType() === "full";
     }
 
     public function store()
@@ -45,10 +49,15 @@ class KamarData
         return $kamarData;
     }
 
-    public static function fromFile($filename)
+    public static function fromFile($filename, $useBasePath=true)
     {        
         $kamarData = new static;
-        $kamarData->data = collect(json_decode(Storage::disk('local')->get('data/' . $filename), true));
+        if($useBasePath) {
+            $kamarData->data = collect(json_decode(Storage::disk('local')->get('data/' . $filename), true));
+        }
+        else {
+            $kamarData->data = collect(json_decode(file_get_contents($filename), true));
+        }
         return $kamarData;
     }
 

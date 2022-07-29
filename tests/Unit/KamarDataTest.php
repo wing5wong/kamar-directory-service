@@ -30,22 +30,34 @@ class KamarDataTest extends TestCase
     public function test_isSyncCheck_returns_false_when_sync_is_not_check()
     {
         $this->setupSyncPartRequest();
-        $kamar = KamarData::fromRequest(request());
+        $kamar = KamarData::fromRequest();
         $this->assertFalse($kamar->isSyncCheck());
     }
 
     public function test_isSyncPart_returns_true_when_sync_is_part()
     {
         $this->setupSyncPartRequest();
-        $kamar = KamarData::fromRequest(request());
+        $kamar = KamarData::fromRequest();
         $this->assertTrue($kamar->isSyncPart());
     }
 
     public function test_isSyncPart_returns_false_when_sync_is_not_part()
     {
         $this->setupSyncCheckRequest();
-        $kamar = KamarData::fromRequest(request());
+        $kamar = KamarData::fromRequest();
         $this->assertFalse($kamar->isSyncPart());
+    }
+
+    public function test_it_creates_part_sync_from_file()
+    {
+        $kamar = KamarData::fromFile('tests/Unit/Stubs/partRequest.json',false);
+        $this->assertTrue($kamar->isSyncPart());
+    }
+
+    public function test_it_creates_full_sync_from_file()
+    {
+        $kamar = KamarData::fromFile('tests/Unit/Stubs/fullRequest.json',false);
+        $this->assertTrue($kamar->isSyncFull());
     }
 
     private function setupSyncCheckRequest()
