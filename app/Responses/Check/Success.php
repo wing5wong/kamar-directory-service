@@ -2,7 +2,9 @@
 
 namespace App\Responses\Check;
 
-class Success extends AbstractCheckResponse
+use App\Responses\AbstractResponse;
+
+class Success extends AbstractResponse
 {
     protected int $error = 0;
     protected string $result = "OK";
@@ -21,8 +23,6 @@ class Success extends AbstractCheckResponse
         
         $this->additionalFields = [
             'status' => $this->status,
-            'service' => $this->service,
-            'version' => $this->version,
             'infourl' => $this->infoUrl,
             'privacystatement' => $this->privacyStatement,
             'options' => $this->options,

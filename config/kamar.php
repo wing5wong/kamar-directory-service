@@ -24,7 +24,7 @@ return [
             "groups" => false,
             "awards" => false,
             "timetables" => true,
-            "attendance" => true,
+            "attendance" => false,
             "assessments" => false,
             "pastoral" => true,
             "learningsupport" => false,

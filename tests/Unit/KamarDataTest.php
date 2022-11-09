@@ -53,14 +53,12 @@ class KamarDataTest extends TestCase
     public function test_it_creates_part_sync_from_file()
     {
         $kamar = KamarData::fromFile('tests/Unit/Stubs/partRequest.json',false);
-        Log::info($kamar->data);
         $this->assertTrue($kamar->isSyncPart());
     }
 
     public function test_it_creates_full_sync_from_file()
     {
         $kamar = KamarData::fromFile('tests/Unit/Stubs/fullRequest.json',false);
-        Log::info($kamar->data);
         $this->assertTrue($kamar->isSyncFull());
     }
 
