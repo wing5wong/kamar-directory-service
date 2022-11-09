@@ -4,7 +4,7 @@ return [
 
     'username' =>  env('KAMAR_DS_USERNAME'),
     'password' => env('KAMAR_DS_PASSWORD'),
-    
+
     'format' => env('KAMAR_DS_FORMAT'),
 
     'serviceName' => 'Kamar Directory Service',
@@ -24,7 +24,7 @@ return [
             "groups" => false,
             "awards" => false,
             "timetables" => true,
-            "attendance" => true,
+            "attendance" => false,
             "assessments" => false,
             "pastoral" => true,
             "learningsupport" => false,
@@ -40,8 +40,8 @@ return [
             "photos" => false,
             "timetables" => true,
             "fields" => [
-                "required" =>  "uniqueid;firstname;lastname;username",
-                "optional" => "schoolindex;title;classification;tutor;leavingdate"
+                "required" =>  "uniqueid;schoolindex;firstname;lastname;email",
+                "optional" => "title;classification;tutor;leavingdate"
             ]
         ],
 
