@@ -5,7 +5,6 @@ namespace Tests\Unit;
 // use PHPUnit\Framework\TestCase;
 use Tests\TestCase;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use App\KamarData;
 
 class KamarDataTest extends TestCase
@@ -65,6 +64,7 @@ class KamarDataTest extends TestCase
     private function setupSyncCheckRequest()
     {
         $request = new Request();
+        $request->headers->set('content-type', 'application/json');
         $request->merge(['SMSDirectoryData' => ['sync' => 'check']]);
         app()->instance('request', $request);
     }
@@ -72,6 +72,7 @@ class KamarDataTest extends TestCase
     private function setupSyncPartRequest()
     {
         $request = new Request();
+        $request->headers->set('content-type', 'application/json');
         $request->merge(['SMSDirectoryData' => ['sync' => 'part']]);
         app()->instance('request', $request);
     }
@@ -79,6 +80,7 @@ class KamarDataTest extends TestCase
     private function setupEmptyRequest()
     {
         $request = new Request();
+        $request->headers->set('content-type', 'application/json');
         $request->merge(['SMSDirectoryData' => []]);
         app()->instance('request', $request);
     }
@@ -86,6 +88,7 @@ class KamarDataTest extends TestCase
     private function setupBlankRequest()
     {
         $request = new Request();
+        $request->headers->set('content-type', 'application/json');
         app()->instance('request', $request);
     }
 

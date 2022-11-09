@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Http\Request;
+use Exception;
 use Illuminate\Support\Facades\Storage;
 
 class KamarData
@@ -43,7 +43,17 @@ class KamarData
     public static function fromRequest()
     {
         $kamarData = new static;
-        $kamarData->data = collect(request()->input());
+        if(request()->isJson())
+        {
+            $kamarData->data = collect(request()->input());
+        }
+        elseif(request()->isXml())
+        {
+            $kamarData->data = collect(request()->xml());
+        }
+        else {
+            throw new Exception("Invalid content");
+        }
         return $kamarData;
     }
 
