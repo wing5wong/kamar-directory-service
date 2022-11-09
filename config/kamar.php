@@ -5,6 +5,8 @@ return [
     'username' =>  env('KAMAR_DS_USERNAME'),
     'password' => env('KAMAR_DS_PASSWORD'),
 
+    'format' => env('KAMAR_DS_FORMAT'),
+
     'serviceName' => 'Kamar Directory Service',
     'serviceVersion' => 1.0,
 
@@ -27,8 +29,8 @@ return [
             "pastoral" => true,
             "learningsupport" => false,
             "fields" => [
-                "required" =>  "uniqueid;schoolindex;nsn;firstname;lastname;email;",
-                "optional" => "username;password;yearlevel;leavingdate;tutor"
+                "required" =>  "uniqueid;firstname;lastname;username;password",
+                "optional" => "schoolindex;nsn;yearlevel;leavingdate;tutor"
             ]
         ],
 

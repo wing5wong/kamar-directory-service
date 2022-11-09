@@ -2,8 +2,10 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+// use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\KamarData;
 
 class KamarDataTest extends TestCase

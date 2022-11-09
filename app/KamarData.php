@@ -2,8 +2,7 @@
 
 namespace App;
 
-use Exception;
-use App\Jobs\ProcessKamarPost;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class KamarData
@@ -39,7 +38,6 @@ class KamarData
     {
         $filename = $this->getSyncType() . "_" . time() . "_" . mt_rand(1000, 9999) . ".json";
         Storage::put('data/' . $filename, request()->getContent());
-        ProcessKamarPost::dispatch($filename);
     }
 
     public static function fromRequest()
