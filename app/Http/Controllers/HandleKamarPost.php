@@ -13,6 +13,7 @@ class HandleKamarPost extends Controller
         protected AuthenticationCheck $authCheck,
         protected KamarData $data,
     ) {
+        $this->data = KamarData::fromRequest();
     }
 
     public function __invoke()
