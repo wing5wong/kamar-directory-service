@@ -53,7 +53,6 @@ class KamarData
     public function isXml()
     {
         return $this->format === 'xml';
-
     }
 
     public static function fromRequest()
