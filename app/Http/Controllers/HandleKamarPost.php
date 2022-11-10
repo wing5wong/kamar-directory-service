@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Responses\Check\Success as CheckSuccess;
-use App\Responses\Standard\{Success, FailedAuthentication, MissingData};
 use App\{AuthenticationCheck, KamarData};
+use App\Responses\Check\Success as CheckSuccess;
+use App\Responses\Check\XMLSuccess as XMLCheckSuccess;
+use App\Responses\Standard\{Success, FailedAuthentication, MissingData};
+use App\Responses\Standard\{XMLSuccess, XMLFailedAuthentication, XMLMissingData};
 
 class HandleKamarPost extends Controller
 {
@@ -18,19 +20,35 @@ class HandleKamarPost extends Controller
 
     public function __invoke()
     {
-        // Check supplied username/password  matches our expectation
+        // Check supplied username/password matches our expectation
         if ($this->authCheck->fails()) {
-            return response()->json(new FailedAuthentication());
+            if ($this->data->isJson()) {
+                return response()->json(new FailedAuthentication());
+            }
+            if ($this->data->isXml()) {
+                return response()->xml((string)(new XmlFailedAuthentication()));
+            }
         }
 
         // Check we have some data
         if ($this->data->isMissing()) {
-            return response()->json(new MissingData());
+            if ($this->data->isJson()) {
+                return response()->json(new MissingData());
+            }
+            if ($this->data->isXml()) {
+                return response()->xml((string)(new XmlMissingData()));
+            }
         }
+
 
         // Check if a 'check' sync, return check response.
         if ($this->data->isSyncCheck()) {
-            return response()->json(new CheckSuccess());
+            if ($this->data->isJson()) {
+                return response()->json(new CheckSuccess());
+            }
+            if ($this->data->isXml()) {
+                return response()->xml((string)(new XmlCheckSuccess()));
+            }
         }
 
         // All other messages - store the data and return 'OK' response.
@@ -41,6 +59,11 @@ class HandleKamarPost extends Controller
     {
         // Do something
         $this->data->store();
-        return response()->json(new Success());
+        if ($this->data->isJson()) {
+            return response()->json(new Success());
+        }
+        if ($this->data->isXml()) {
+            return response()->xml((string)(new XmlSuccess()));
+        }
     }
 }

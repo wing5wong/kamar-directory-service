@@ -4,6 +4,8 @@ return [
 
     'username' =>  env('KAMAR_DS_USERNAME'),
     'password' => env('KAMAR_DS_PASSWORD'),
+    
+    'format' => env('KAMAR_DS_FORMAT'),
 
     'format' => env('KAMAR_DS_FORMAT'),
 
@@ -40,8 +42,8 @@ return [
             "photos" => false,
             "timetables" => true,
             "fields" => [
-                "required" =>  "uniqueid;schoolindex;firstname;lastname;email",
-                "optional" => "title;classification;tutor;leavingdate"
+                "required" =>  "uniqueid;firstname;lastname;username",
+                "optional" => "schoolindex;title;classification;tutor;leavingdate"
             ]
         ],
 
