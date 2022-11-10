@@ -132,7 +132,7 @@ class KamarDataTest extends TestCase
     private function setupSyncCheckXMLRequest()
     {
         $request = new Request();
-        $request = Request::create('/', 'POST', [], [], [], [], ArrayToXml::convert(['sync' => 'check'], 'SMSDirectoryData'));
+        $request = Request::create('/', 'POST', [], [], [], [], ArrayToXml::convert(['@attributes' => ['sync' => 'check']], 'SMSDirectoryData'));
 
         $request->headers->set('content-type', 'application/xml');
         app()->instance('request', $request);
@@ -140,7 +140,7 @@ class KamarDataTest extends TestCase
 
     private function setupSyncPartXMLRequest()
     {
-        $request = Request::create('/', 'POST', [], [], [], [], ArrayToXml::convert(['sync' => 'part'], 'SMSDirectoryData'));
+        $request = Request::create('/', 'POST', [], [], [], [], ArrayToXml::convert(['@attributes' => ['sync' => 'part']], 'SMSDirectoryData'));
         $request->headers->set('content-type', 'application/xml');
         app()->instance('request', $request);
     }

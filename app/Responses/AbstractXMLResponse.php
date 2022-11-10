@@ -22,7 +22,8 @@ abstract class AbstractXMLResponse implements Stringable
 
     public function __toString()
     {
-        return ArrayToXml::convert(array_merge(
+        return ArrayToXml::convert(
+            array_merge(
                 [
                     'service' => $this->service,
                     'version' => $this->version,
@@ -30,7 +31,8 @@ abstract class AbstractXMLResponse implements Stringable
                     'result' => $this->result,
                 ],
                 $this->additionalFields
-            )
-            , 'SMSDirectoryData');
+            ),
+            'SMSDirectoryData'
+        );
     }
 }

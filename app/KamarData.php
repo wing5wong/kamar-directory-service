@@ -12,12 +12,16 @@ class KamarData
 
     public function isMissing()
     {
-        return empty(data_get($this->data, 'SMSDirectoryData'));
+        return $this->format == 'json'
+        ? empty(data_get($this->data, 'SMSDirectoryData'))
+        : empty($this->data);
     }
 
     public function getSyncType()
     {
-        return data_get($this->data, $this->format == 'json' ? 'SMSDirectoryData.sync' : '@attributes.sync');
+        return $this->format == 'json'
+        ? data_get($this->data,  'SMSDirectoryData.sync')
+        : data_get($this->data,  '@attributes.sync');
     }
 
     public function isSyncCheck()

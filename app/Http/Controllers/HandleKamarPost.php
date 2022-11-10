@@ -8,9 +8,6 @@ use App\Responses\Check\XMLSuccess as XMLCheckSuccess;
 use App\Responses\Standard\{Success, FailedAuthentication, MissingData};
 use App\Responses\Standard\{XMLSuccess, XMLFailedAuthentication, XMLMissingData};
 
-use Illuminate\Support\Facades\Log;
-
-
 class HandleKamarPost extends Controller
 {
 
@@ -23,15 +20,13 @@ class HandleKamarPost extends Controller
 
     public function __invoke()
     {
-
-        Log::info($this->data->getSyncType());
         // Check supplied username/password matches our expectation
         if ($this->authCheck->fails()) {
             if ($this->data->isJson()) {
                 return response()->json(new FailedAuthentication());
             }
             if ($this->data->isXml()) {
-                return response()->xml(new XmlFailedAuthentication());
+                return response()->xml((string)(new XmlFailedAuthentication()));
             }
         }
 
@@ -41,7 +36,7 @@ class HandleKamarPost extends Controller
                 return response()->json(new MissingData());
             }
             if ($this->data->isXml()) {
-                return response()->xml(new XmlMissingData());
+                return response()->xml((string)(new XmlMissingData()));
             }
         }
 
@@ -52,7 +47,7 @@ class HandleKamarPost extends Controller
                 return response()->json(new CheckSuccess());
             }
             if ($this->data->isXml()) {
-                return response()->xml(new XmlCheckSuccess());
+                return response()->xml((string)(new XmlCheckSuccess()));
             }
         }
 
@@ -68,7 +63,7 @@ class HandleKamarPost extends Controller
             return response()->json(new Success());
         }
         if ($this->data->isXml()) {
-            return response()->xml(new XmlSuccess());
+            return response()->xml((string)(new XmlSuccess()));
         }
     }
 }
