@@ -6,9 +6,7 @@ return [
     'password' => env('KAMAR_DS_PASSWORD'),
     
     'format' => env('KAMAR_DS_FORMAT'),
-
-    'format' => env('KAMAR_DS_FORMAT'),
-
+    
     'serviceName' => 'Kamar Directory Service',
     'serviceVersion' => 1.0,
 
