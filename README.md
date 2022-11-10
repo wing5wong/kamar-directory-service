@@ -4,6 +4,7 @@
 Copy the `.env.example` to `.env` and set the values for:
 - `KAMAR_DS_USERNAME` Your Directory Service Username
 - `KAMAR_DS_PASSWORD` Your Directory Service Password
+- `KAMAR_DS_FORMAT` Your Directory Service Format (json|xml)
 
 __Do not set Username and Password values in the config file.__
 
