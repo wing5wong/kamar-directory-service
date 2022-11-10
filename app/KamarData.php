@@ -41,7 +41,7 @@ class KamarData
 
     public function store()
     {
-        $filename = $this->getSyncType() . "_" . time() . "_" . mt_rand(1000, 9999) . $this->format;
+        $filename = $this->getSyncType() . "_" . time() . "_" . mt_rand(1000, 9999) . "." . $this->format;
         Storage::put('data/' . $filename, request()->getContent());
     }
 
