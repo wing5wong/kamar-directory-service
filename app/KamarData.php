@@ -14,7 +14,7 @@ class KamarData
     {
         return $this->format == 'json'
         ? empty(data_get($this->data, 'SMSDirectoryData'))
-        : empty($this->data);
+        : $this->data->isEmpty();
     }
 
     public function getSyncType()
@@ -61,7 +61,7 @@ class KamarData
         if (request()->isJson()) {
             $kamarData->data = collect(request()->input());
         } elseif (request()->isXml()) {
-            $kamarData->data = collect(request()->xml(true));
+            $kamarData->data = request()->getContent() > '' ? collect( request()->xml(true)) : collect([]);
             $kamarData->format = 'xml';
         } else {
             throw new Exception("Invalid content");
