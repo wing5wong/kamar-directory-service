@@ -7,6 +7,20 @@ use Illuminate\Support\Facades\Storage;
 
 class KamarData
 {
+    const SYNC_TYPE_CHECK = 'check';
+    const SYNC_TYPE_PART = 'part';
+    const SYNC_TYPE_FULL = 'full';
+    const SYNC_TYPE_ASSESSMENTS ='assessments';
+    const SYNC_TYPE_ATTENDANCE ='attendance';
+    const SYNC_TYPE_BOOKINGS ='bookings';
+    const SYNC_TYPE_CALENDAR ='calendar';
+    const SYNC_TYPE_NOTICES ='notices';
+    const SYNC_TYPE_PASTORAL ='pastoral';
+    const SYNC_TYPE_PHOTOS ='photos';
+    const SYNC_TYPE_STAFFPHOTOS ='staffphotos';
+    const SYNC_TYPE_STUDENTTIMETABLES ='studenttimetables';
+    const SYNC_TYPE_STAFFTIMETABLES ='stafftimetables';
+
     public $data;
     public $format = 'json';
 
@@ -26,17 +40,17 @@ class KamarData
 
     public function isSyncCheck()
     {
-        return $this->getSyncType() === "check";
+        return $this->getSyncType() === self::SYNC_TYPE_CHECK;
     }
 
     public function isSyncPart()
     {
-        return $this->getSyncType() === "part";
+        return $this->getSyncType() === self::SYNC_TYPE_PART;
     }
 
     public function isSyncFull()
     {
-        return $this->getSyncType() === "full";
+        return $this->getSyncType() === self::SYNC_TYPE_FULL;
     }
 
     public function store()

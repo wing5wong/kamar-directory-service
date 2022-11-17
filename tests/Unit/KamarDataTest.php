@@ -77,6 +77,26 @@ class KamarDataTest extends TestCase
         $this->assertFalse($kamar->isSyncPart());
     }
 
+    /**
+    * @dataProvider syncTypeDataProvider
+    */
+    public function test_itGetsTheCorrectSyncType($syncConst, $syncType)
+    {
+        $this->setupGenericSyncRequest($syncType);
+        $kamar = KamarData::fromRequest();
+        $this->assertSame(constant("App\KamarData::$syncConst"), $kamar->getSyncType());
+    }
+
+    /**
+    * @dataProvider syncTypeDataProvider
+    */
+    public function test_itGetsTheCorrectXMLSyncType($syncConst, $syncType)
+    {
+        $this->setupGenericXMLSyncRequest($syncType);
+        $kamar = KamarData::fromRequest();
+        $this->assertSame(constant("App\KamarData::$syncConst"), $kamar->getSyncType());
+    }
+
     public function test_isSyncPart_returns_false_when_XMLsync_is_not_part()
     {
         $this->setupSyncCheckXMLRequest();
@@ -145,11 +165,18 @@ class KamarDataTest extends TestCase
         app()->instance('request', $request);
     }
 
-    private function setupEmptyXMLRequest()
+    private function setupGenericXMLSyncRequest($syncType)
+    {
+        $request = Request::create('/', 'POST', [], [], [], [], ArrayToXml::convert(['@attributes' => ['sync' => $syncType]], 'SMSDirectoryData'));
+        $request->headers->set('content-type', 'application/xml');
+        app()->instance('request', $request);
+    }
+
+    private function setupGenericSyncRequest($syncType)
     {
         $request = new Request();
-        $request = Request::create('/', 'POST', [], [], [], [], ArrayToXml::convert([], 'SMSDirectoryData'));
-        $request->headers->set('content-type', 'application/xml');
+        $request->headers->set('content-type', 'application/json');
+        $request->merge(['SMSDirectoryData' => ['sync' => $syncType]]);
         app()->instance('request', $request);
     }
 
@@ -158,5 +185,24 @@ class KamarDataTest extends TestCase
         $request = new Request();
         $request->headers->set('content-type', 'application/xml');
         app()->instance('request', $request);
+    }
+
+    public function syncTypeDataProvider()
+    {
+        return     [
+        ['SYNC_TYPE_CHECK', 'check'],
+        ['SYNC_TYPE_PART', 'part'],
+        ['SYNC_TYPE_FULL', 'full'],
+        ['SYNC_TYPE_ASSESSMENTS','assessments'],
+        ['SYNC_TYPE_ATTENDANCE','attendance'],
+        ['SYNC_TYPE_BOOKINGS','bookings'],
+        ['SYNC_TYPE_CALENDAR','calendar'],
+        ['SYNC_TYPE_NOTICES','notices'],
+        ['SYNC_TYPE_PASTORAL','pastoral'],
+        ['SYNC_TYPE_PHOTOS','photos'],
+        ['SYNC_TYPE_STAFFPHOTOS','staffphotos'],
+        ['SYNC_TYPE_STUDENTTIMETABLES','studenttimetables'],
+        ['SYNC_TYPE_STAFFTIMETABLES','stafftimetables'],
+        ];
     }
 }
