@@ -38,19 +38,24 @@ class KamarData
         : data_get($this->data,  '@attributes.sync');
     }
 
+    public function isSyncType($syncType)
+    {
+        return $this->getSyncType() === $syncType; 
+    }
+
     public function isSyncCheck()
     {
-        return $this->getSyncType() === self::SYNC_TYPE_CHECK;
+        return $this->isSyncType(self::SYNC_TYPE_CHECK);
     }
 
     public function isSyncPart()
     {
-        return $this->getSyncType() === self::SYNC_TYPE_PART;
+        return $this->isSyncType(self::SYNC_TYPE_PART);
     }
 
     public function isSyncFull()
     {
-        return $this->getSyncType() === self::SYNC_TYPE_FULL;
+        return $this->isSyncType(self::SYNC_TYPE_FULL);
     }
 
     public function store()
@@ -72,12 +77,18 @@ class KamarData
     public static function fromRequest()
     {
         $kamarData = new static;
+
         if (request()->isJson()) {
             $kamarData->data = collect(request()->input());
-        } elseif (request()->isXml()) {
-            $kamarData->data = request()->getContent() > '' ? collect( request()->xml(true)) : collect([]);
+        }
+        elseif (request()->isXml()) {
+            $kamarData->data = request()->getContent() > ''
+            ? collect( request()->xml(true))
+            : collect([]);
+
             $kamarData->format = 'xml';
-        } else {
+        }
+        else {
             throw new Exception("Invalid content");
         }
         return $kamarData;

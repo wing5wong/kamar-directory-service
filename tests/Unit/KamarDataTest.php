@@ -10,6 +10,11 @@ use Spatie\ArrayToXml\ArrayToXml;
 
 class KamarDataTest extends TestCase
 {
+    public function test_is_missing_returns_true_when_no_data()
+    {
+        $this->assertTrue((new KamarData)->isMissing());
+    }
+
     public function test_isMissing_returns_true_when_request_is_blank()
     {
         $this->setupBlankRequest();
@@ -85,7 +90,7 @@ class KamarDataTest extends TestCase
         $kamar = KamarData::fromRequest();
         $this->assertFalse($kamar->$syncTypeMethod());
     }
-    
+
     public function syncTypeDataProvider()
     {
         return     [
