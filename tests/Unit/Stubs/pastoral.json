@@ -1,0 +1,49 @@
+{
+    "SMSDirectoryData": {
+        "datetime": 20221122111614,
+        "sync": "pastoral",
+        "sms": "KAMAR",
+        "version": 2198,
+        "schools": [
+            {
+                "index": 1,
+                "schoolindex": 1,
+                "moeCode": "0189",
+                "name": "WHANGANUI HIGH SCHOOL",
+                "type": 40,
+                "authoritative": true
+            }
+        ],
+        "pastoral": {
+            "count": 1,
+            "data": [
+                {
+                    "id": 12345,
+                    "nsn": "1234567890",
+                    "type": "D",
+                    "ref": 145767,
+                    "reason": "c.  Inappropriate location \/   offsite - Major",
+                    "reasonPB": "ILO",
+                    "motivation": null,
+                    "motivationPB": null,
+                    "location": "English",
+                    "locationPB": "CLR",
+                    "othersinvolved": null,
+                    "action1": "i.  Deans \/ SLT interview",
+                    "action2": null,
+                    "action3": null,
+                    "actionPB1": "CWS  - Conference with Student",
+                    "actionPB2": null,
+                    "actionPB3": null,
+                    "teacher": "ML",
+                    "points": null,
+                    "demerits": null,
+                    "dateevent": "20221121",
+                    "timeevent": "115000",
+                    "datedue": "00000000",
+                    "duestatus": null
+                }
+            ]
+        }
+    }
+}

@@ -22,6 +22,7 @@ class KamarData
     const SYNC_TYPE_STAFFTIMETABLES ='stafftimetables';
 
     public $data;
+    public $syncType;
     public $format = 'json';
 
     public function isMissing()
@@ -79,14 +80,19 @@ class KamarData
         $kamarData = new static;
 
         if (request()->isJson()) {
-            $kamarData->data = collect(request()->input());
+            $kamarData->setData(collect(request()->input()), 'json');
+            //$kamarData->data = collect(request()->input());
         }
         elseif (request()->isXml()) {
-            $kamarData->data = request()->getContent() > ''
+            // $kamarData->data = request()->getContent() > ''
+            // ? collect( request()->xml(true))
+            // : collect([]);
+            // $kamarData->format = 'xml';
+
+            $data = request()->getContent() > ''
             ? collect( request()->xml(true))
             : collect([]);
-
-            $kamarData->format = 'xml';
+            $kamarData->setData($data, 'xml');
         }
         else {
             throw new Exception("Invalid content");
@@ -98,10 +104,60 @@ class KamarData
     {
         $kamarData = new static;
         if ($useBasePath) {
-            $kamarData->data = collect(json_decode(Storage::disk('local')->get('data/' . $filename), true));
+            $kamarData->setData(collect(json_decode(Storage::disk('local')->get('data/' . $filename), true)),'json');
+            //$kamarData->data = collect(json_decode(Storage::disk('local')->get('data/' . $filename), true));
+            $kamarData->syncType = $kamarData->getSyncType();
         } else {
-            $kamarData->data = collect(json_decode(file_get_contents($filename), true));
+            $kamarData->setData(collect(json_decode(file_get_contents($filename), true)) ,'json');
+            //$kamarData->data = collect(json_decode(file_get_contents($filename), true));
+            //$kamarData->syncType = $kamarData->getSyncType();
         }
         return $kamarData;
+    }
+
+    public function getStaff()
+    {
+        return collect(data_get($this->data, 'SMSDirectoryData.staff.data'));
+    }
+
+    public function getStudents()
+    {
+        return collect(data_get($this->data, 'SMSDirectoryData.students.data'));
+    }
+
+    public function getStaffTimetables()
+    {
+        return $this->syncType == self::SYNC_TYPE_STAFFTIMETABLES
+        ? collect(data_get($this->data, 'SMSDirectoryData.timetables.data'))
+        : collect([]);
+    }
+
+    public function getStudentTimetables()
+    {
+        return $this->syncType == self::SYNC_TYPE_STUDENTTIMETABLES
+        ? collect(data_get($this->data, 'SMSDirectoryData.timetables.data'))
+        : collect([]);
+    }
+
+    public function getAttendance()
+    {
+        return data_get($this->data, 'SMSDirectoryData.attendance.data');
+    }
+
+    public function getPastoral()
+    {
+        return data_get($this->data, 'SMSDirectoryData.pastoral.data');
+    }
+
+    public function getResults()
+    {
+        return data_get($this->data, 'SMSDirectoryData.results.data');
+    }
+
+    private function setData($data, $format)
+    {
+        $this->data = $data;
+        $this->format = $format;
+        $this->syncType = $this->getSyncType();
     }
 }

@@ -1,0 +1,55 @@
+{
+    "SMSDirectoryData": {
+        "datetime": 20221122111614,
+        "sync": "results",
+        "fullsync": 0,
+        "sms": "KAMAR",
+        "version": 2198,
+        "schools": [
+            {
+                "index": 1,
+                "schoolindex": 1,
+                "moeCode": "0189",
+                "name": "WHANGANUI HIGH SCHOOL",
+                "type": 40,
+                "authoritative": true
+            }
+        ],
+        "results": {
+            "count": 1,
+            "data": [
+                {
+                    "id": 12345,
+                    "nsn": "1234567890",
+                    "type": "U",
+                    "number": "20138",
+                    "version": 1,
+                    "code": null,
+                    "enrolled": true,
+                    "published": true,
+                    "date": "20201021",
+                    "year": 2020,
+                    "yearlevel": 11,
+                    "subject": "OAS1",
+                    "result": "Achieved",
+                    "results": [],
+                    "resultData": [
+                        "1|2|3|1|3|6|12|40|2|2020|9",
+                        2,
+                        3,
+                        1,
+                        3,
+                        6,
+                        12,
+                        40,
+                        2,
+                        2020
+                    ],
+                    "comment": null,
+                    "curriculumlevel": null,
+                    "course": null
+                }
+            ]
+        }
+    }
+}
