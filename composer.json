@@ -12,10 +12,12 @@
         "laravel/tinker": "^2.7",
         "mtownsend/request-xml": "^2.2",
         "mtownsend/response-xml": "^2.1",
-        "spatie/array-to-xml": "^3.1"
+        "spatie/array-to-xml": "^3.1",
+        "wing5wong/kamar-directory-service": "@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
+        "jeroen-g/laravel-packager": "^2.8",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
@@ -60,5 +62,14 @@
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": {
+        "wing5wong/kamar-directory-service": {
+            "type": "path",
+            "url": "C:\\xampp8.1.4\\htdocs\\kamar-directory-service\\packages/wing5wong/kamar-directory-service",
+            "options": {
+                "symlink": true
+            }
+        }
+    }
 }

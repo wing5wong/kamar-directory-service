@@ -1,0 +1,69 @@
+{
+    "SMSDirectoryData": {
+        "datetime": 20221122111106,
+        "sync": "attendance",
+        "sms": "KAMAR",
+        "version": 2198,
+        "schools": [
+            {
+                "index": 1,
+                "schoolindex": 1,
+                "moeCode": "0189",
+                "name": "WHANGANUI HIGH SCHOOL",
+                "type": 40,
+                "authoritative": true
+            }
+        ],
+        "attendance": {
+            "count": 1,
+            "data": [
+                {
+                    "id": 12345,
+                    "nsn": "0140801531",
+                    "values": [
+                        {
+                            "date": "20220214",
+                            "codes": ".PPP.RP.P",
+                            "alt": ".PPP.PP.P",
+                            "hdu": 0,
+                            "hdj": 0,
+                            "hdp": 2
+                        },
+                        {
+                            "date": "20220215",
+                            "codes": ".PPP.PP.P",
+                            "alt": ".PPP.PP.P",
+                            "hdu": 0,
+                            "hdj": 0,
+                            "hdp": 2
+                        },
+                        {
+                            "date": "20220216",
+                            "codes": ".PPP.PP.P",
+                            "alt": ".PPP.PP.P",
+                            "hdu": 0,
+                            "hdj": 0,
+                            "hdp": 2
+                        },
+                        {
+                            "date": "20220217",
+                            "codes": ".JJJ.JJ.J",
+                            "alt": ".JJJ.JJ.J",
+                            "hdu": 0,
+                            "hdj": 2,
+                            "hdp": 0
+                        },
+                        {
+                            "date": "20220218",
+                            "codes": ".JJJ.JJ",
+                            "alt": ".JJJ.JJ",
+                            "hdu": 0,
+                            "hdj": 2,
+                            "hdp": 0
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

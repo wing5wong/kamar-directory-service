@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Wing5wong\KamarDirectoryService\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;

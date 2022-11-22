@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "33a96bc4904009a764bd07fcc12e83a1",
+    "content-hash": "519c1b9428da98229a6baed44cabd311",
     "packages": [
         {
             "name": "brick/math",
@@ -5603,6 +5603,63 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wing5wong/kamar-directory-service",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "C:/xampp8.1.4/htdocs/kamar-directory-service/packages/wing5wong/kamar-directory-service",
+                "reference": "d172c779452d2f03b844d1461cb29a5847cd1972"
+            },
+            "require": {
+                "illuminate/support": "~9"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~7",
+                "phpunit/phpunit": "~9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Wing5wong\\KamarDirectoryService\\KamarDirectoryServiceServiceProvider"
+                    ],
+                    "aliases": {
+                        "KamarDirectoryService": "Wing5wong\\KamarDirectoryService\\Facades\\KamarDirectoryService"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wing5wong\\KamarDirectoryService\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Wing5wong\\KamarDirectoryService\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Author Name",
+                    "email": "author@email.com",
+                    "homepage": "http://author.com"
+                }
+            ],
+            "description": ":package_description",
+            "homepage": "https://github.com/wing5wong/kamar-directory-service",
+            "keywords": [
+                "KamarDirectoryService",
+                "Laravel"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": false
+            }
         }
     ],
     "packages-dev": [
@@ -5864,6 +5921,72 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "jeroen-g/laravel-packager",
+            "version": "2.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Jeroen-G/laravel-packager.git",
+                "reference": "27bddbe896a753ddbb4cf38ae799baa3ba66d3d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Jeroen-G/laravel-packager/zipball/27bddbe896a753ddbb4cf38ae799baa3ba66d3d6",
+                "reference": "27bddbe896a753ddbb4cf38ae799baa3ba66d3d6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-zip": "*",
+                "guzzlehttp/guzzle": "~7",
+                "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0",
+                "php": "^7.1|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": ">=3.8",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "suggest": {
+                "sensiolabs/security-checker": "Required to use the security check command"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "JeroenG\\Packager\\PackagerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JeroenG\\Packager\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "EUPL-1.1"
+            ],
+            "authors": [
+                {
+                    "name": "JeroenG",
+                    "email": "jeroengjeroeng@gmail.com",
+                    "homepage": "https://github.com/Jeroen-G"
+                }
+            ],
+            "description": "A cli tool for creating Laravel packages.",
+            "homepage": "https://github.com/Jeroen-G/laravel-packager",
+            "keywords": [
+                "Skeleton",
+                "laravel",
+                "package",
+                "packager"
+            ],
+            "support": {
+                "issues": "https://github.com/Jeroen-G/laravel-packager/issues",
+                "source": "https://github.com/Jeroen-G/laravel-packager/tree/2.8.0"
+            },
+            "time": "2022-02-09T18:40:02+00:00"
         },
         {
             "name": "laravel/sail",
@@ -7988,7 +8111,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "wing5wong/kamar-directory-service": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
