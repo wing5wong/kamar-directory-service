@@ -81,14 +81,8 @@ class KamarData
 
         if (request()->isJson()) {
             $kamarData->setData(collect(request()->input()), 'json');
-            //$kamarData->data = collect(request()->input());
         }
         elseif (request()->isXml()) {
-            // $kamarData->data = request()->getContent() > ''
-            // ? collect( request()->xml(true))
-            // : collect([]);
-            // $kamarData->format = 'xml';
-
             $data = request()->getContent() > ''
             ? collect( request()->xml(true))
             : collect([]);
@@ -104,13 +98,9 @@ class KamarData
     {
         $kamarData = new static;
         if ($useBasePath) {
-            $kamarData->setData(collect(json_decode(Storage::disk('local')->get('data/' . $filename), true)),'json');
-            //$kamarData->data = collect(json_decode(Storage::disk('local')->get('data/' . $filename), true));
-            $kamarData->syncType = $kamarData->getSyncType();
+            $kamarData->setData(collect(json_decode(Storage::disk('local')->get('data/' . $filename), true)), 'json');
         } else {
-            $kamarData->setData(collect(json_decode(file_get_contents($filename), true)) ,'json');
-            //$kamarData->data = collect(json_decode(file_get_contents($filename), true));
-            //$kamarData->syncType = $kamarData->getSyncType();
+            $kamarData->setData(collect(json_decode(file_get_contents($filename), true)) , 'json');
         }
         return $kamarData;
     }
@@ -159,5 +149,7 @@ class KamarData
         $this->data = $data;
         $this->format = $format;
         $this->syncType = $this->getSyncType();
+
+        return $this;
     }
 }
