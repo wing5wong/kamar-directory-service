@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\AuthenticationCheck;
+use App\Auth\AuthenticationCheck;
 use Tests\TestCase;
 use Illuminate\Http\Request;
 
