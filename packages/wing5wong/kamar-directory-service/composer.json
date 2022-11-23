@@ -1,18 +1,24 @@
 {
     "name": "wing5wong/kamar-directory-service",
-    "description": ":package_description",
+    "description": "Kamar Directory Service functionality for your Laravel app",
     "license": "MIT",
     "authors": [
         {
-            "name": "Author Name",
-            "email": "author@email.com",
-            "homepage": "http://author.com"
+            "name": "Sean Anderson",
+            "email": "wing5wong@hotmail.com"
         }
     ],
     "homepage": "https://github.com/wing5wong/kamar-directory-service",
     "keywords": ["Laravel", "KamarDirectoryService"],
     "require": {
-        "illuminate/support": "~9"
+        "php": "^8.0.2",
+        "illuminate/support": "~9",
+        "illuminate/console": "~9",
+        "illuminate/routing": "~9",
+        "illuminate/filesystem": "~9",
+        "mtownsend/request-xml": "^2.2",
+        "mtownsend/response-xml": "^2.1",
+        "spatie/array-to-xml": "^3.1"
     },
     "require-dev": {
         "phpunit/phpunit": "~9.0",

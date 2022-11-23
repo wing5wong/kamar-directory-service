@@ -1,57 +1,43 @@
-# KamarDirectoryService
+# KAMAR Directory Service Example
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Total Downloads][ico-downloads]][link-downloads]
-[![Build Status][ico-travis]][link-travis]
-[![StyleCI][ico-styleci]][link-styleci]
+## Initial Configuration
+Copy the `.env.example` to `.env` and set the values for:
+- `KAMAR_DS_USERNAME` Your Directory Service Username
+- `KAMAR_DS_PASSWORD` Your Directory Service Password
+- `KAMAR_DS_FORMAT` Your Directory Service Format (json|xml)
 
-This is where your description should go. Take a look at [contributing.md](contributing.md) to see a to do list.
+__Do not set Username and Password values in the config file.__
 
-## Installation
+Set the values in `/config/kamar.php` for:
+- `serviceName` e.g. "Kamar Directory Service"
+- `serviceVersion` e.g. 1.0
+- `infoUrl` e.g. "https://www.myschool.co.nz/more-info"
+- `privacyStatement` e.g. "Change this to a valid privacy statement | All your data belongs to us and will be kept in a top secret vault."
+- `options` The options to be requested for your directory service
 
-Via Composer
+## Routes
+A single route is defined in `/app/routes/kamar.php` accepting `POST` requests to `/kamar`.  
+The route is handled by `/app/Http/Controllers/HandleKamarPost.php`.  
+Base functionality as described in the KAMAR example is implemented here, but you are free to adjust to suit your requirements.
 
-``` bash
-$ composer require wing5wong/kamar-directory-service
-```
+## Middleware
+A new `kamar` middleware group is created in `/app/Http/Kernel.php`.  
+The group is the same as the default `web` group, but has the csrf middleware removed.  
+You MUST make sure you are authenticating requests to your application.  
 
-## Usage
+## Storage
+The example implementation will write json data files at `/storage/app/data`. These files are not publicly accessible by default.
 
-## Change log
+## Commands & Schedules
+A `RemoveOldDataFiles` command is available that will remove files older than 3 days.
+A schedule to run the command daily is also configured (`/app/Console/Kernel.php`)
 
-Please see the [changelog](changelog.md) for more information on what has changed recently.
+Run the command manually with `php artisan KamarDS:removeOldDataFiles`, or configure a cron job to run the task as per the schedule.
+
+For information on configuring a schedule, see https://laravel.com/docs/9.x/scheduling#running-the-scheduler
 
 ## Testing
+Run tests with `php artisan test`
 
-``` bash
-$ composer test
-```
-
-## Contributing
-
-Please see [contributing.md](contributing.md) for details and a todolist.
-
-## Security
-
-If you discover any security related issues, please email author@email.com instead of using the issue tracker.
-
-## Credits
-
-- [Author Name][link-author]
-- [All Contributors][link-contributors]
-
-## License
-
-MIT. Please see the [license file](license.md) for more information.
-
-[ico-version]: https://img.shields.io/packagist/v/wing5wong/kamar-directory-service.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/wing5wong/kamar-directory-service.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/wing5wong/kamar-directory-service/master.svg?style=flat-square
-[ico-styleci]: https://styleci.io/repos/12345678/shield
-
-[link-packagist]: https://packagist.org/packages/wing5wong/kamar-directory-service
-[link-downloads]: https://packagist.org/packages/wing5wong/kamar-directory-service
-[link-travis]: https://travis-ci.org/wing5wong/kamar-directory-service
-[link-styleci]: https://styleci.io/repos/12345678
-[link-author]: https://github.com/wing5wong
-[link-contributors]: ../../contributors
+## KAMAR Directory Services Documentation
+See https://directoryservices.kamar.nz/ for implementation details.
