@@ -10,10 +10,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
-        "mtownsend/request-xml": "^2.2",
-        "mtownsend/response-xml": "^2.1",
-        "spatie/array-to-xml": "^3.1",
-        "wing5wong/kamar-directory-service": "@dev"
+        "wing5wong/kamar-directory-services": "@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -64,12 +61,9 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": {
-        "wing5wong/kamar-directory-service": {
-            "type": "path",
-            "url": "C:\\xampp8.1.4\\htdocs\\kamar-directory-service\\packages/wing5wong/kamar-directory-service",
-            "options": {
-                "symlink": true
-            }
+        "wing5wong/kamar-directory-services": {
+            "type": "vcs",
+            "url": "https://github.com/wing5wong/kamar-directory-services.git"
         }
     }
 }
