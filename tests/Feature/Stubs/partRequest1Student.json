@@ -1,0 +1,35 @@
+{
+    "SMSDirectoryData": {
+        "datetime": 20221122123112,
+        "sync": "part",
+        "sms": "KAMAR",
+        "version": 2198,
+        "schools": [
+            {
+                "index": 1,
+                "schoolindex": 1,
+                "moeCode": "0189",
+                "name": "WHANGANUI HIGH SCHOOL",
+                "type": 40,
+                "authoritative": true
+            }
+        ],
+        "students": {
+            "count": 1,
+            "data": [
+                {
+                    "id": 12345,
+                    "created": 20221122123112,
+                    "role": "Student",
+                    "uniqueid": 1234567890,
+                    "schoolindex": 1,
+                    "username": "student.t.12345",
+                    "password": "aDlsaW0hdU0=",
+                    "firstname": "Test",
+                    "lastname": "Student",
+                    "yearlevel": 9
+                }
+            ]
+        }
+    }
+}
