@@ -29,7 +29,7 @@ class ProcessKamarPost implements ShouldQueue
 
     public function handle()
     {
-        Log::info('Got Job:' . $this->filename);
+        //Log::info('Got Job:' . $this->filename);
         $this->data = collect(json_decode(Storage::disk('local')->get('data/' . $this->filename), true));
         if (in_array(data_get($this->data, 'SMSDirectoryData.sync'), ['full'])) {
             $this->updateStudentRecords();
@@ -38,12 +38,12 @@ class ProcessKamarPost implements ShouldQueue
         if (!in_array(data_get($this->data, 'SMSDirectoryData.sync'), ['full'])) {
             Storage::disk('local')->delete('data/' . $this->filename);
         }
-        Log::info('Finished Job:' . $this->filename);
+        //Log::info('Finished Job:' . $this->filename);
     }
 
     public function updateStudentRecords()
     {
-        Log::info('processing students');
+        //Log::info('processing students');
         if (collect(data_get($this->data, 'SMSDirectoryData.students.data'))->isNotEmpty()) {
             foreach (collect(data_get($this->data, 'SMSDirectoryData.students.data')) as $student) {
                 $updates = [
@@ -59,8 +59,8 @@ class ProcessKamarPost implements ShouldQueue
                         $updates
                     );
                 } catch (Exception $e) {
-                    Log::warning('Error creating user' . $student['firstname'] . ' ' . $student['lastname'] . "(" . $student['uniqueid'] . ")");
-                    Log::warning($e->getMessage());
+                    //Log::warning('Error creating user' . $student['firstname'] . ' ' . $student['lastname'] . "(" . $student['uniqueid'] . ")");
+                    //Log::warning($e->getMessage());
                 }
             }
         }
@@ -68,7 +68,7 @@ class ProcessKamarPost implements ShouldQueue
 
     public function updateStaffRecords()
     {
-        Log::info('processing staff');
+        //Log::info('processing staff');
         if (collect(data_get($this->data, 'SMSDirectoryData.staff.data'))->isNotEmpty()) {
             foreach (collect(data_get($this->data, 'SMSDirectoryData.staff.data')) as $staff) {
                 $updates = [
@@ -82,8 +82,8 @@ class ProcessKamarPost implements ShouldQueue
                         $updates
                     );
                 } catch (Exception $e) {
-                    Log::warning('Error creating user' . $staff['firstname'] . ' ' . $staff['lastname'] . "(" . $staff['uniqueid'] . ")");
-                    Log::warning($e->getMessage());
+                    //Log::warning('Error creating user' . $staff['firstname'] . ' ' . $staff['lastname'] . "(" . $staff['uniqueid'] . ")");
+                    //Log::warning($e->getMessage());
                 }
             }
         }
