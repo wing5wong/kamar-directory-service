@@ -35,11 +35,20 @@ return [
             'root' => storage_path('app'),
             'throw' => false,
         ],
-
+        'data' => [
+            'driver' => 'local',
+            'root' => storage_path('app/data'),
+            'throw' => false,
+        ],
+        'network' => [
+            'driver' => 'local',
+            'root' => "\\\\whsfs9\Dept\\1-Sys Admins",
+            'throw' => false,
+        ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
