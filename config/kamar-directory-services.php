@@ -4,8 +4,11 @@ return [
 
     'username' =>  env('KAMAR_DS_USERNAME', 'My Kamar directory service username'),
     'password' => env('KAMAR_DS_PASSWORD', 'My Kamar directory service password'),
-
     'encryptionKey' => env('KAMAR_ENCRYPTION_KEY', 'My Kamar directory service encryption key, if applicable'),
+    'encryptionAlgorithm' => env('KAMAR_ENCRYPTION_ALGORITHM', 'aes-128-ecb'),
+
+    'storageDisk' => env('KAMAR_DS_STORAGE_DISK', 'local'),
+    'storageFolder' => env('KAMAR_DS_STORAGE_FOLDER', 'data'),
 
     'format' => env('KAMAR_DS_FORMAT'),
 
