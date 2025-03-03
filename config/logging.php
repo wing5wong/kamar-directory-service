@@ -72,7 +72,25 @@ return [
 
         'processStudent' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/processStudent.log'),
+            'path' => storage_path('logs/student.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 3,
+        ],
+        'processStaff' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/staff.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 3,
+        ],
+        'processAttendance' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/attendance.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 3,
+        ],
+        'processPastoral' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/pastoral.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 3,
         ],
