@@ -12,12 +12,14 @@
         "laravel/sanctum": "^3.2",
         "laravel/telescope": "^4.9",
         "laravel/tinker": "^2.7",
+        "livewire/livewire": "^3.6",
         "spatie/simple-excel": "^3.2",
         "wing5wong/kamar-directory-services": "dev-main"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
         "jeroen-g/laravel-packager": "^2.8",
+        "laravel/pint": "^1.20",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
