@@ -14,11 +14,12 @@ return [
 
     'serviceName' => 'Kamar Directory Service',
     'serviceVersion' => 1.0,
+    'countryDataStored' => 'New Zealand',
 
     'authSuffix' => env('KAMAR_DS_AUTH_SUFFIX'),
 
-    'infoUrl' => 'https://www.myschool.co.nz/more-info',
-    'privacyStatement' => 'Change this to a valid privacy statement | All your data belongs to us and will be kept in a top secret vault.',
+    'infoUrl' => 'https://www.whanganuihigh.school.nz',
+    'privacyStatement' => 'Data isused for managing user accounts within Whanganui High School only.',
 
     'options' => [
 
@@ -31,13 +32,13 @@ return [
             "groups" => true,
             "awards" => false,
             "timetables" => false,
-            "attendance" => false,
+            "attendance" => true,
             "assessments" => false,
-            "pastoral" => false,
+            "pastoral" => true,
             "learningsupport" => false,
             "fields" => [
                 "required" =>  "uniqueid;firstname;lastname;username",
-                "optional" => "schoolindex;nsn;yearlevel;leavingdate;tutor;house;ethnicityL1;ethnicityL2;ethnicity"
+                "optional" => "schoolindex;nsn;yearlevel;leavingdate;tutor;house;ethnicityL1;ethnicityL2;ethnicity,gender"
             ]
         ],
 
@@ -54,7 +55,7 @@ return [
 
         "common" => [
             "subjects" => false,
-            "notices" => false,
+            "notices" => true,
             "calendar" => false,
             "bookings" => false
         ]
