@@ -1318,16 +1318,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.9.0",
+            "version": "v10.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "35078125f61ef0b125edf524de934f108d4b47fd"
+                "reference": "5c93d2795c393b462481179ce42dedfb30cc19b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/35078125f61ef0b125edf524de934f108d4b47fd",
-                "reference": "35078125f61ef0b125edf524de934f108d4b47fd",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/5c93d2795c393b462481179ce42dedfb30cc19b5",
+                "reference": "5c93d2795c393b462481179ce42dedfb30cc19b5",
                 "shasum": ""
             },
             "require": {
@@ -1514,7 +1514,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-04-25T13:47:18+00:00"
+            "time": "2023-07-26T03:30:46+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -6395,12 +6395,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wing5wong/kamar-directory-services.git",
-                "reference": "96a6ac1a85dec68641f7a372894fe1a351d60710"
+                "reference": "1a0b66c79efa99397eb432a142ed63106623512d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wing5wong/kamar-directory-services/zipball/96a6ac1a85dec68641f7a372894fe1a351d60710",
-                "reference": "96a6ac1a85dec68641f7a372894fe1a351d60710",
+                "url": "https://api.github.com/repos/wing5wong/kamar-directory-services/zipball/1a0b66c79efa99397eb432a142ed63106623512d",
+                "reference": "1a0b66c79efa99397eb432a142ed63106623512d",
                 "shasum": ""
             },
             "require": {
@@ -6488,7 +6488,7 @@
                 "source": "https://github.com/wing5wong/kamar-directory-services/tree/main",
                 "issues": "https://github.com/wing5wong/kamar-directory-services/issues"
             },
-            "time": "2025-02-18T21:24:02+00:00"
+            "time": "2025-04-14T04:25:05+00:00"
         }
     ],
     "packages-dev": [

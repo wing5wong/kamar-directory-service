@@ -1,6 +1,2 @@
 @import "tailwindcss";
 @source "../views";
-
-body {
-    background-color: #fefefe;
-}

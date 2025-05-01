@@ -14,16 +14,10 @@ class ProcessNotices implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     */
     public function __construct(
         public $notices
     ) {}
 
-    /**
-     * Execute the job.
-     */
     public function handle(): void
     {
         Storage::put('notices.json', json_encode($this->notices));

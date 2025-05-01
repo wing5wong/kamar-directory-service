@@ -35,6 +35,7 @@ return [
             "attendance" => true,
             "assessments" => false,
             "pastoral" => true,
+            "recognitions" => true,
             "learningsupport" => false,
             "fields" => [
                 "required" =>  "uniqueid;firstname;lastname;username",
@@ -43,7 +44,7 @@ return [
         ],
 
         "staff" => [
-            "details" => false,
+            "details" => true,
             "passwords" => false,
             "photos" => false,
             "timetables" => false,
