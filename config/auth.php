@@ -109,8 +109,8 @@ return [
     'password_timeout' => 10800,
 
     'veryBasicAuth' => [
-        'username' => 'admin',
-        'password' => 'Analyze!'
+        'username' => env('VERY_BASIC_USERNAME'),
+        'password' => env('VERY_BASIC_PASSWORD'),
     ]
 
 ];
