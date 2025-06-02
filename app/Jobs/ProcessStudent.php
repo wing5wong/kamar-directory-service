@@ -28,12 +28,12 @@ class ProcessStudent implements ShouldQueue
         info('[start] Update account: ' . $this->student->student_id);
         Log::channel($this->logChannel)->info("GOT JOB: {$this->student->student_id} {$this->student->username} {$this->student->passwordencrypted} {$this->student->resetpassword} ");
 
-        Student::updateOrCreate(
-            ['uuid' => $this->student->uuid],
-            $this->student->toArray()
-        );
-
         try {
+            Student::updateOrCreate(
+                ['uuid' => $this->student->uuid],
+                $this->student->toArray()
+            );
+
             $password = $encrypter->decrypt($this->student->passwordencrypted);
             $path = base_path("\scripts\processStudent.ps1");
             $sId = $this->student->student_id;
@@ -46,8 +46,6 @@ class ProcessStudent implements ShouldQueue
             $output = shell_exec($command);
             Log::channel($this->logChannel)->info($output);
             Log::channel($this->logChannel)->info("[finish] Run update script");
-
-            Log::channel($this->logChannel)->info("[finish] Update account: " . $sId);
         } catch (Exception $e) {
             Log::channel($this->logChannel)->warning("[error] Failed to update account");
             Log::channel($this->logChannel)->warning($e);

@@ -410,6 +410,8 @@
     <a href="{{ route('attendance') }}">Attendance</a>
     <a href="{{ route('pastorals') }}">Pastorals</a>
     <a href="{{ route('recognitions') }}">Recognitions</a>
+    <a href="{{ route('attendance.1t3l') }}">Attendance list Yesterday 1T 3L</a>
+    <a href="{{ route('pastorals.list') }}">Pastoral list yesterday D or cellphone</a>
 
     <div
         class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">

@@ -39,11 +39,51 @@ dark:focus:border-blue-500">
         class="ml-0 w-0 w-100 grow-0 shrink-0 print:hidden bg-slate-100 p-2 mb-4 grid grid-cols-12 gap-2 auto-rows-max h-screen overflow-y-scroll">
 
 
-        <div wire:click.prevent="resetFields"
-            class="col-span-12 flex justify-center items-center bg-slate-950 text-white py-1">
-            reset</div>
 
 
+
+        <div class="flex flex-col col-span-12">
+            <label for="reason" class="text-sm font-medium text-slate-900">Ignore reason</label>
+
+            {{-- <select
+                class="mt-2 block w-full rounded-md border border-gray-100 bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                name="reason" id="" wire:model.live="reason" multiple>
+                <option value=''>All</option>
+                @foreach ($categories['reasons'] as $reason)
+                    <option value="{{ $reason }}"> {{ $reason }}</option>
+                @endforeach
+            </select> --}}
+
+            {{-- <fieldset
+                class="flex gap-4 flex-row justify-start flex-wrap mt-2 block w-full rounded-md border border-gray-100 bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 flex justify-around">
+                @foreach ($categories['reasons'] as $reason)
+                    <label for="reason-{{ $reason }}"
+                        class="text-sm font-medium flex items-center gap-2 w-4/10">
+                        <input id="reason-{{ $reason }}" type="checkbox" value="{{ $reason }}"
+                            wire:model.live.debounce.1500ms="reason"
+                            class="block rounded-md px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" />
+                        <span>{{ $reason }}</span>
+                    </label>
+                @endforeach
+            </fieldset> --}}
+
+            <select name="" id="" multiple wire:model.defer="reason" style="height:300px">
+                @foreach ($categories['reasons'] as $reason)
+                    <option id="reason-{{ $reason }}" value="{{ $reason }}"
+                        class="block rounded-md px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                        {{ $reason }}
+                    </option>
+                @endforeach
+            </select>
+            <div class="buttons flex gap-2">
+                <button wire:click.prevent="resetFields"
+                    class="flex-1 justify-center items-center bg-slate-950 text-white py-1 cursor-pointer	">
+                    reset</button>
+                <button wire:click="reloadData"
+                    class="flex-1 justify-center items-center bg-green-950 text-white py-1 cursor-pointer	">Apply
+                    filter</button>
+            </div>
+        </div>
         <div class="flex-row col-span-12">
             <label class="text-slate-900" for="">Types</label>
             <fieldset
@@ -257,30 +297,6 @@ dark:focus:border-blue-500">
 
 
 
-        <div class="flex flex-col col-span-12">
-            <label for="reason" class="text-sm font-medium text-slate-900">Ignore reason</label>
-            {{-- <select
-                class="mt-2 block w-full rounded-md border border-gray-100 bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                name="reason" id="" wire:model.live="reason" multiple>
-                <option value=''>All</option>
-                @foreach ($categories['reasons'] as $reason)
-                    <option value="{{ $reason }}"> {{ $reason }}</option>
-                @endforeach
-            </select> --}}
-
-            <fieldset
-                class="flex gap-4 flex-row justify-start flex-wrap mt-2 block w-full rounded-md border border-gray-100 bg-gray-100 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 flex justify-around">
-                @foreach ($categories['reasons'] as $reason)
-                    <label for="reason-{{ $reason }}"
-                        class="text-sm font-medium flex items-center gap-2 w-4/10">
-                        <input id="reason-{{ $reason }}" type="checkbox" value="{{ $reason }}"
-                            wire:model.live.debounce.1500ms="reason"
-                            class="block rounded-md px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50" />
-                        <span>{{ $reason }}</span>
-                    </label>
-                @endforeach
-            </fieldset>
-        </div>
 
 
     </div>
@@ -288,7 +304,7 @@ dark:focus:border-blue-500">
     <div style="position: relative"
         class="flex-auto charts grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 gap-2 auto-rows-max  h-screen overflow-y-scroll">
         <button id="sidebarToggle"
-            class="absolute -left-2 top-1/7 bg-red-500 rounded-full rounded-l-none p-2 border-1 border-l-0">
+            class="absolute -left-2 top-1/7 bg-red-500 rounded-full rounded-l-none p-2 border-1 border-l-0 cursor-pointer	">
             hide</button>
         <div class="chart-container bg-white shadow-md p-2">
             <h2>By type</h2>

@@ -50,7 +50,7 @@ return [
             "timetables" => false,
             "fields" => [
                 "required" =>  "uniqueid;firstname;lastname;username",
-                "optional" => "schoolindex;title;position;classification;tutor;house;leavingdate;groups.departments"
+                "optional" => "schoolindex;title;position;classification;tutor;house;leavingdate;groups.departments;photocopierid;extension"
             ]
         ],
 

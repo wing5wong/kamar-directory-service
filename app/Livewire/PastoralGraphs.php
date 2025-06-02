@@ -73,7 +73,8 @@ class PastoralGraphs extends Component
         'PERIOD 4',
         '2ND BREAK',
         'PERIOD 5',
-        'AFTER SCHOOL'
+        'AFTER SCHOOL',
+        'OUT OF SCHOOL HOURS'
     ];
 
 
