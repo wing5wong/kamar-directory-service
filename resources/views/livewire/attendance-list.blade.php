@@ -1,26 +1,8 @@
 <div>
-    <h1>Students with X truants and Y Lates</h1>
-    <div class="filters">
-        <div class="field">
-            <span>Truants or ?</span>
-            <input type="number" wire:model.live="tCount" min=0 max=6>
-        </div>
-        <div class="field">
-            <span>Lates</span>
-            <input type="number" wire:model.live="lCount" min=0 max=6>
-        </div>
-        <div class="field">
-            <span>Date</span>
-            <input type="date" wire:model.live="date">
-        </div>
+    <h1>Students with {{ $tCount }} truants, ? or L
+        {{-- or {{ $lCount }} Lates --}}
+    </h1>
 
-        <div class="field">
-            <span>Ignore full day T / ?</span>
-            <input type="checkbox" wire:model.live="ignoreFullDay">
-        </div>
-    </div>
-    <h3>{{ $attendances->count() }} students found</h3>
-    <hr>
     <style>
         .container {
             display: flex;
@@ -87,9 +69,37 @@
         .house-Whenua {
             background: #c3f5c1
         }
+
+
+        @media print {
+            .right {
+                display: none !important;
+            }
+        }
     </style>
     <div class="container">
         <div class="left">
+            <div class="filters">
+                <div class="field">
+                    <span>Truants/?/L</span>
+                    <input type="number" wire:model.live="tCount" min=0 max=6>
+                </div>
+                {{-- <div class="field">
+                    <span>Lates</span>
+                    <input type="number" wire:model.live="lCount" min=0 max=6>
+                </div> --}}
+                <div class="field">
+                    <span>Date</span>
+                    <input type="date" wire:model.live="date">
+                </div>
+
+                <div class="field">
+                    <span>Ignore full day T / ?</span>
+                    <input type="checkbox" wire:model.live="ignoreFullDay">
+                </div>
+            </div>
+            <h3>{{ $attendances->count() }} students</h3>
+            <hr>
             <table border=1>
                 <tr>
                     {{-- <th>Date</th> --}}
@@ -116,24 +126,6 @@
                 @endforeach
             </table>
 
-
-            <h3>Form Time Waggers</h3>
-
-            <h3>{{ $skippedAttendances->count() }} students found</h3>
-            <table>
-                @foreach ($skippedAttendances->groupBy('student.house') as $house => $attendanceEntries)
-                    @foreach ($attendanceEntries as $attendance)
-                        <tr>
-                            <td>{{ $attendance->date }}</td>
-                            <td>{{ $attendance->student_id }}</td>
-                            <td>{{ $attendance->student->fullName }}</td>
-                            <td>{{ $attendance->alt }}</td>
-                            <td>{{ $attendance->student->house }}</td>
-                            <td>{{ $attendance->student->tutor }}</td>
-                        </tr>
-                    @endforeach
-                @endforeach
-            </table>
         </div>
         <div class="right">
             <div class="right">
@@ -141,6 +133,39 @@
                 <button id="copyButton">Copy IDs</button>
                 <textarea width="20%" rows="20" id="out" readonly wire:model="studentIDList"></textarea>
             </div>
+        </div>
+
+
+
+        <div class="right">
+            <h3>Form Time Late / Absent <small> ({{ $skippedAttendances->count() }} students)</small></h3>
+
+            <table border=1>
+                @foreach ($skippedAttendances->groupBy('student.house') as $house => $attendanceEntries)
+                    @foreach ($attendanceEntries as $attendance)
+                        <tr class="house-{{ $attendance->student->house }}">
+                            <td>{{ $attendance->student_id }}</td>
+                            <td>{{ $attendance->student->fullName }}</td>
+                            <td>{{ $attendance->codes }}</td>
+                            <td>{{ $attendance->student->tutor }}</td>
+                        </tr>
+                    @endforeach
+                @endforeach
+            </table>
+        </div>
+        <div class="right">
+            <h3>P1 Late / Absent <small> ({{ $p1Lates->count() }} students)</small></h3>
+            <table border=1>
+                @foreach ($p1Lates->groupBy('student.house') as $house => $attendanceEntries)
+                    @foreach ($attendanceEntries as $attendance)
+                        <tr class="house-{{ $attendance->student->house }}">
+                            <td>{{ $attendance->student_id }}</td>
+                            <td>{{ $attendance->student->fullName }}</td>
+                            <td>{{ $attendance->codes }}</td>
+                        </tr>
+                    @endforeach
+                @endforeach
+            </table>
         </div>
     </div>
 

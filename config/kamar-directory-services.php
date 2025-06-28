@@ -39,7 +39,42 @@ return [
             "learningsupport" => false,
             "fields" => [
                 "required" =>  "uniqueid;firstname;lastname;username",
-                "optional" => "schoolindex;nsn;yearlevel;leavingdate;tutor;house;ethnicityL1;ethnicityL2;ethnicity,gender"
+                "optional" => collect([
+                    "schoolindex",
+                    "nsn",
+                    "yearlevel",
+                    "leavingdate",
+                    "tutor",
+                    "house",
+                    "ethnicityL1",
+                    "ethnicityL2",
+                    "ethnicity",
+                    "gender",
+                    "res",
+                    "resa",
+                    "resb",
+                    "res.title",
+                    "res.salutation",
+                    "res.email",
+                    "res.numFlatUnit",
+                    "res.numStreet",
+                    "res.ruralDelivery",
+                    "res.suburb",
+                    "res.town",
+                    "res.postcode",
+                    "caregivers",
+                    "caregivers1",
+                    "caregivers2",
+                    "caregivers3",
+                    "caregivers4",
+                    "caregiver.name",
+                    "caregiver.relationship",
+                    "caregiver.status",
+                    "caregiver.address",
+                    "caregiver.email",
+                    "caregiver.mobile",
+                ])->implode(';')
+
             ]
         ],
 
@@ -57,7 +92,7 @@ return [
         "common" => [
             "subjects" => false,
             "notices" => true,
-            "calendar" => false,
+            "calendar" => true,
             "bookings" => false
         ]
     ],

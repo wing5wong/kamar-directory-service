@@ -8,20 +8,16 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Storage;
 
-class ProcessNotices implements ShouldQueue
+class ProcessCalendars implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public function __construct(
-        public $notices
+        public $calendars
     ) {
-        $this->onQueue('notices');
+        $this->onQueue('calendar');
     }
 
-    public function handle(): void
-    {
-        Storage::put('notices.json', json_encode($this->notices));
-    }
+    public function handle(): void {}
 }

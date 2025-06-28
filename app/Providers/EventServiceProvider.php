@@ -2,27 +2,26 @@
 
 namespace App\Providers;
 
+use App\Listeners\HandleAttendanceDataReceived;
+use App\Listeners\HandleNoticeDataReceived;
+use App\Listeners\HandlePastoralDataReceived;
+use App\Listeners\HandleRecognitionDataReceived;
+use App\Listeners\HandleStaffDataReceived;
+use App\Listeners\HandleStudentDataReceived;
 use App\Listeners\ProcessKamarPost;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Wing5wong\KamarDirectoryServices\Events\AttendanceDataReceived;
 use Wing5wong\KamarDirectoryServices\Events\KamarPostStored;
+use Wing5wong\KamarDirectoryServices\Events\NoticeDataReceived;
+use Wing5wong\KamarDirectoryServices\Events\PastoralDataReceived;
+use Wing5wong\KamarDirectoryServices\Events\RecognitionDataReceived;
+use Wing5wong\KamarDirectoryServices\Events\StaffDataReceived;
+use Wing5wong\KamarDirectoryServices\Events\StudentDataReceived;
 
 class EventServiceProvider extends ServiceProvider
 {
-    /**
-     * The event to listener mappings for the application.
-     *
-     * @var array<class-string, array<int, class-string>>
-     */
-    protected $listen = [
-        Registered::class => [
-            SendEmailVerificationNotification::class,
-        ],
-        KamarPostStored::class => [
-            ProcessKamarPost::class
-        ],
-    ];
 
     /**
      * Register any events for your application.
@@ -41,6 +40,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function shouldDiscoverEvents()
     {
-        return false;
+        return true;
     }
 }

@@ -21,7 +21,9 @@ class ProcessStaff implements ShouldQueue
 
     public function __construct(
         public StaffData $staff
-    ) {}
+    ) {
+        $this->onQueue('staff');
+    }
 
     public function handle(): void
     {

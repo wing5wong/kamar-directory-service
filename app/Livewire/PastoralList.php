@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use Carbon\Carbon;
 use Livewire\Component;
+use Livewire\Attributes\Computed;
+use Wing5wong\KamarDirectoryServices\Models\Attendance;
 use Wing5wong\KamarDirectoryServices\Models\Pastoral;
 
 class PastoralList extends Component
@@ -13,22 +15,43 @@ class PastoralList extends Component
     public $excludedIds = [];
     public $studentIDList = '';
     public $excludedActions = [
-        'q.  Stood Down' //2 spaces.....
+        'q.  Stood Down', //2 spaces.....
+        'q. Stood Down (Internal)',
     ];
+
+    public $casts = [
+        'date' => 'date'
+    ];
+
+    public $manyLates;
+
+    #[Computed]
+    public function uniqueEntries()
+    {
+        return $this->pastorals->pluck('student_id')->diff($this->excludedIds)->unique()->count();
+    }
+    public function getCarbonDateProperty()
+    {
+        return Carbon::parse($this->date);
+    }
 
     public function mount()
     {
         $this->date = Carbon::now()->previousWeekday()->toDateString();
+        // $this->yesterdaysDate = $this->date->toDateString();
         $this->loadPastorals();
+        $this->load3DayTruants();
+    }
+
+    public function updatedDate()
+    {
+        $this->excludedIds = [];
     }
 
     public function updated($property)
     {
         $this->loadPastorals();
-    }
-    public function updatedDate()
-    {
-        $this->excludedIds = [];
+        $this->load3DayTruants();
     }
 
     public function loadPastorals()
@@ -47,7 +70,34 @@ class PastoralList extends Component
             ->get();
 
 
-        $this->studentIDList = $this->pastorals->pluck('student_id')->diff($this->excludedIds)->implode("\n");
+        $this->studentIDList = $this->pastorals->pluck('student_id')->diff($this->excludedIds)->unique()->implode("\n");
+    }
+
+    public function load3DayTruants()
+    {
+        $threeWeekDaysAgo = $this->carbonDate->clone()->subWeekDays(2)->toDateString();
+
+        // Step 1: Get studentIDs that meet the condition
+        $student_ids = Attendance::select('student_id')
+            ->whereHas('student', function ($query) {
+                $query->where('tutor', '!=', 'AE'); // exclude AE
+            })
+            //->whereDate('date', Carbon::now()->previousWeekday()->toDateString())   // previous weekday
+            ->whereBetween('date', [$threeWeekDaysAgo, $this->date])
+            ->whereRaw("(LENGTH(codes) - LENGTH(REPLACE(codes, 'T', '')) + LENGTH(codes) - LENGTH(REPLACE(codes, '?', ''))) >= 2")
+            ->orderBy('student_id')
+            ->orderBy('date')
+            ->groupBy('student_id')
+            ->havingRaw('COUNT(*) >= 3')
+            ->pluck('student_id');
+
+        // Step 2: Get the matching records for those student_ids
+        $records = Attendance::with('student')->whereIn('student_id', $student_ids)
+            ->whereBetween('date', [$threeWeekDaysAgo, $this->date])
+            ->whereRaw("(LENGTH(codes) - LENGTH(REPLACE(codes, 'T', '')) + LENGTH(codes) - LENGTH(REPLACE(codes, '?', ''))) >= 2")
+            ->get();
+
+        $this->manyLates = $records;
     }
 
     public function render()

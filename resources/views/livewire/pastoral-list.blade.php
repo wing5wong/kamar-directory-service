@@ -4,7 +4,7 @@
     <div class="filters">
         <div class="field">
             <span>Date</span>
-            <input type="date" wire:model.live="date">
+            <input type="date" wire:model.live="date"> {{ $this->carbonDate->dayName }}
         </div>
     </div>
 
@@ -81,15 +81,22 @@
         .house-Whenua {
             background: #c3f5c1
         }
+
+        @media print {
+            .right {
+                display: none !important;
+            }
+        }
     </style>
     <div class="container">
         <div class="left">
-            <h3>Pastorals - {{ $pastorals->count() }} students found</h3>
+            <h3>Pastorals - {{ $pastorals->count() }} entries found</h3>
             <table border=1>
                 <tr>
                     {{-- <th>Date</th> --}}
                     <th>Student ID</th>
                     <th>Name</th>
+                    <th>Teacher</th>
                     {{-- <th>Type</th> --}}
                     <th>Reason</th>
                     <th>Action</th>
@@ -103,6 +110,7 @@
                             <td>{{ $pastoral->student_id }}</td>
                             <td>{{ $pastoral->student->fullName }}</td>
                             {{-- <td>{{ $pastoral->type }}</td> --}}
+                            <td>{{ $pastoral->teacher }}</td>
                             <td>{{ $pastoral->reason }}</td>
                             <td>{{ $pastoral->action1 }}</td>
                             {{-- <td>{{ $pastoral->student->house }}</td> --}}
@@ -117,7 +125,7 @@
         </div>
 
         <div class="right">
-            <h3>{{ $pastorals->count() - count($excludedIds) }} Students</h3>
+            <h3>{{ $this->uniqueEntries }} Students</h3>
             <button id="copyButton">Copy IDs</button>
             <textarea width="20%" rows="20" id="out" readonly wire:model="studentIDList"></textarea>
 
@@ -127,6 +135,28 @@
                     <li>{{ $excludes }}</li>
                 @endforeach
             </ul>
+        </div>
+
+        <div class="right">
+            <h3>Students with 3+ Truant/? in last 3 days - {{ $manyLates->groupBy('student_id')->count() }} entries
+                found</h3>
+            <table border=1>
+                @foreach ($manyLates->groupBy('student_id') as $id => $entries)
+                    <tr>
+
+                        @foreach ($entries as $entry)
+                    <tr>
+                        @if ($loop->first)
+                            <td rowspan="{{ $entries->count() }}">{{ $entry->student->fullName }}</td>
+                        @endif
+                        <td>
+                            {{ $entry->date }} - {{ $entry->codes }}
+                        </td>
+                    </tr>
+                @endforeach
+                </tr>
+                @endforeach
+            </table>
         </div>
     </div>
 

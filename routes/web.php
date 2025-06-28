@@ -5,6 +5,7 @@ use App\Livewire\AttendanceGraphs;
 use App\Livewire\AttendanceList;
 use App\Livewire\PastoralGraphs;
 use App\Livewire\PastoralList;
+use App\Livewire\StudentRecord;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,11 @@ Route::get('/pastorals', PastoralGraphs::class)
 Route::get('pastorals/list', PastoralList::class)
     ->middleware(VeryBasicAuth::class)
     ->name('pastorals.list');
+
+Route::get('students/record', StudentRecord::class)
+    ->middleware(VeryBasicAuth::class)
+    ->name('students.record');
+
 
 Route::get('/recognitions', function () {
     return view('recognitions');

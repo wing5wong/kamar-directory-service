@@ -21,7 +21,9 @@ class ProcessStudent implements ShouldQueue
 
     public function __construct(
         public StudentData $student
-    ) {}
+    ) {
+        $this->onQueue('students');
+    }
 
     public function handle(KamarEncryptionInterface $encrypter): void
     {

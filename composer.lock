@@ -6395,12 +6395,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wing5wong/kamar-directory-services.git",
-                "reference": "1a0b66c79efa99397eb432a142ed63106623512d"
+                "reference": "6b05e44bc3a8e047eb018668d439dad2f2e8bd26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wing5wong/kamar-directory-services/zipball/1a0b66c79efa99397eb432a142ed63106623512d",
-                "reference": "1a0b66c79efa99397eb432a142ed63106623512d",
+                "url": "https://api.github.com/repos/wing5wong/kamar-directory-services/zipball/6b05e44bc3a8e047eb018668d439dad2f2e8bd26",
+                "reference": "6b05e44bc3a8e047eb018668d439dad2f2e8bd26",
                 "shasum": ""
             },
             "require": {
@@ -6488,7 +6488,7 @@
                 "source": "https://github.com/wing5wong/kamar-directory-services/tree/main",
                 "issues": "https://github.com/wing5wong/kamar-directory-services/issues"
             },
-            "time": "2025-04-14T04:25:05+00:00"
+            "time": "2025-06-28T23:48:30+00:00"
         }
     ],
     "packages-dev": [

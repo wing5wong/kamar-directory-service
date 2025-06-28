@@ -17,7 +17,9 @@ class ProcessPastorals implements ShouldQueue
 
     public function __construct(
         private PastoralData $pastoralEntry
-    ) {}
+    ) {
+        $this->onQueue('pastorals');
+    }
 
     public function handle(): void
     {

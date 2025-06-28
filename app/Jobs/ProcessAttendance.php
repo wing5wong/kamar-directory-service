@@ -18,7 +18,9 @@ class ProcessAttendance implements ShouldQueue
 
     public function __construct(
         private AttendanceData $attendanceData
-    ) {}
+    ) {
+        $this->onQueue('attendances');
+    }
 
     public function handle(): void
     {
